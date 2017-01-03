@@ -19,6 +19,9 @@
     "webpack-cleanup-plugin": "^0.4.1",
     "webpack-shell-plugin": "^0.5.0"
   },
+  "icon": {
+    "64": "webextension/icons/pulse-64.png"
+  },
   "scripts": {
     "build": "./node_modules/webpack/bin/webpack.js"
   }

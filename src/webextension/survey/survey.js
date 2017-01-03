@@ -1,21 +1,17 @@
 const styles = require('./styles.scss');
 
 const { Logger } = require('../../lib/log');
-const logger = new Logger('survey', window.console);
+const Open = require('./lib/open');
 
-logger.log('Loaded');
+const logger = new Logger('survey', window.console);
 
 
 function main() {
-  logger.log('Main running.');
-  window.addEventListener('click', evt => {
-    if (evt.target.nodeName.toLowerCase() === 'button') {
-      logger.log('Opening in new tab.');
-      browser.tabs.create({
-        url: '/survey/index.html'
-      });
-    }
-  });
+  logger.log('Initializing');
+
+  window.app = {
+    open: new Open()
+  };
 }
 
 if (document.readyState !== 'loading'){

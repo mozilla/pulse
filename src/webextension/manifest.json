@@ -7,6 +7,12 @@
   "icons": {
     "48": "icons/pulse-64.png"
   },
+  "applications": {
+    "gecko": {
+      "id": "pulse@mozilla.org",
+      "strict_min_version": "51.0"
+    }
+  },
   "page_action": {
     "browser_style": true,
     "default_icon": "icons/pulse-64.png",
