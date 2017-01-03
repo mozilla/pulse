@@ -10,7 +10,8 @@
   "page_action": {
     "browser_style": true,
     "default_icon": "icons/pulse-64.png",
-    "default_title": "Status update with Pulse."
+    "default_title": "Status update with Pulse.",
+    "default_popup": "survey/index.html"
   },
   "background": {
     "scripts": [
