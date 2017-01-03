@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "pulse",
+  "version": "1.0",
+  "description": "A super sweet catchphrase.",
+  "homepage_url": "https://testpilot.firefox.com/experiments/pulse",
+  "icons": {
+    "48": "icons/pulse-64.png"
+  },
+  "page_action": {
+    "browser_style": true,
+    "default_icon": "icons/pulse-64.png",
+    "default_title": "Status update with Pulse."
+  },
+  "background": {
+    "scripts": [
+      "background.js"
+    ]
+  }
+}

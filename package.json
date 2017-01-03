@@ -1,0 +1,21 @@
+{
+  "name": "pulse",
+  "title": "Pulse",
+  "id": "pulse@mozilla.com",
+  "description": "Some super sweet catchphrase.",
+  "author": "Firefox Test Pilot",
+  "license": "MPL-2.0",
+  "version": "0.1.0",
+  "homepage": "https://testpilot.firefox.com/experiments/pulse",
+  "hasEmbeddedWebExtension": true,
+  "dependencies": {
+    "copy-webpack-plugin": "^4.0.1",
+    "jpm": "^1.2.2",
+    "webpack": "^1.14.0",
+    "webpack-cleanup-plugin": "^0.4.1",
+    "webpack-shell-plugin": "^0.5.0"
+  },
+  "scripts": {
+    "build": "./node_modules/webpack/bin/webpack.js"
+  }
+}
