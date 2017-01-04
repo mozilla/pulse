@@ -5,7 +5,7 @@ const logger = new Logger('background', console);
 
 // Show the page action for all existing tabs.
 browser.tabs.query({}).then(tabs => {
-  for (tab of tabs) {
+  for (let tab of tabs) {
     logger.log('Loaded pageAction into existing tab', tab.id);
     browser.pageAction.show(tab.id);
   }

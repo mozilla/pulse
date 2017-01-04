@@ -7,5 +7,5 @@ logger.log('SDK startup');
 
 webext.startup().then(({ browser }) => {
   logger.log('WebExtension startup');
-  browser.runtime.onConnect.addListener(port => {});
+  browser.runtime.onConnect.addListener(() => {});
 });

@@ -1,4 +1,4 @@
-const styles = require('./styles.scss');
+const styles = require('./styles.scss'); // eslint-disable-line no-unused-vars
 
 const { Logger } = require('../../lib/log');
 const logger = new Logger('survey', window.console);
