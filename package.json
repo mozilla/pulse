@@ -20,6 +20,13 @@
     "webpack-shell-plugin": "^0.5.0"
   },
   "scripts": {
-    "build": "./node_modules/webpack/bin/webpack.js"
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mozilla/pulse.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mozilla/pulse/issues"
   }
 }
