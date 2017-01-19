@@ -27,8 +27,9 @@
     "64": "webextension/icons/pulse-64.png"
   },
   "scripts": {
-    "build": "./node_modules/webpack/bin/webpack.js",
-    "watch": "./node_modules/webpack/bin/webpack.js --watch",
-    "prettier": "./node_modules/prettier/bin/prettier.js --write src/**/*.js webpack.config.js"
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "prettier": "prettier --single-quote --write src/**/*.js webpack.config.js",
+    "lint": "eslint ."
   }
 }
