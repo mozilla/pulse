@@ -48,7 +48,13 @@ While the WebExtension:
 
 ## Style
 
-Pulse follows the default formatting recommendations provided by [`prettier`](https://github.com/jlongster/prettier). To automatically clean up the working tree, run:
+Pulse follows the default formatting recommendations provided by [`prettier`](https://github.com/jlongster/prettier). To lint the source tree:
+
+```sh
+npm run lint
+```
+
+To automatically clean up the working tree, run:
 
 ```sh
 npm run prettier

@@ -14,6 +14,7 @@
     "babel-preset-latest": "^6.16.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.1",
+    "eslint": "^3.13.1",
     "jpm": "^1.2.2",
     "node-sass": "^4.1.1",
     "prettier": "0.0.9",
@@ -26,9 +27,14 @@
   "icon": {
     "64": "webextension/icons/pulse-64.png"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mozilla/pulse.git"
+  },
   "scripts": {
-    "build": "./node_modules/webpack/bin/webpack.js",
-    "watch": "./node_modules/webpack/bin/webpack.js --watch",
-    "prettier": "./node_modules/prettier/bin/prettier.js --write src/**/*.js webpack.config.js"
+    "build": "webpack",
+    "watch": "webpack",
+    "prettier": "prettier --write src/**/*.js webpack.config.js",
+    "lint": "eslint ."
   }
 }
