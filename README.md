@@ -41,6 +41,15 @@ While the WebExtension:
 - Serves the survey to collect information from the user.
 
 
+## Style
+
+Pulse follows the default formatting recommendations provided by [`prettier`](https://github.com/jlongster/prettier). To automatically clean up the working tree, run:
+
+```sh
+npm run prettier
+```
+
+
 ## More Information
 
 - License: [MIT](license.md)
