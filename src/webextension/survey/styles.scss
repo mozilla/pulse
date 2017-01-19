@@ -1,6 +1,117 @@
-html {
-  body {
-    background: #FFF;
-    min-width: 320px;
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Open+Sans:400,600,700');
+
+$large: 'only screen and (min-width: 480px)';
+
+* { box-sizing: border-box; }
+
+body {
+  background: linear-gradient(to left top, #db4753, #b23256);
+  font-family: "Open Sans", "Helvetica", sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  min-width: 320px;
+  padding: 0;
+
+  > * {
+    display: block;
+    margin: 0 auto;
+    max-width: 640px;
+    width: 100%;
   }
+}
+
+header {
+    align-items: center;
+    border-top: 4px solid #FFF;
+    display: flex;
+    height: 32px;
+    justify-content: space-between;
+  padding: 0 0 0 16px;
+  position: relative;
+
+  &::before {
+      background: rgba(0, 0, 0, 0.15);
+      content: '';
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      height: 1px;
+  }
+
+  h1 {
+    background: url("../../icons/heart.svg") no-repeat left;
+    background-size: 16px;
+    color: #FFF;
+    font-family: "Montserrat", "Helvetica", sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    margin: 0;
+    opacity: 0.925;
+    padding: 0 0 0 24px;
+    text-transform: uppercase;
+  }
+
+  @media #{$large} {
+      border-top: 0;
+    padding: 64px 16px 16px;
+
+    &::before {
+        display: none;
+    }
+  }
+}
+
+main {
+  background: #FFF;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+
+  p {
+    margin: 0;
+  }
+}
+
+.fieldset{
+    border: 0;
+    border-top: 1px solid #DDD;
+    margin: 0;
+    padding: 16px;
+
+    h2 {
+        color: #333;
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0;
+        padding: 0;
+        line-height: 1.29;
+    }
+
+    &:first-child {
+        border-top: 0;
+    }
+}
+
+
+.open--trigger {
+    @media #{$large} {
+        position: absolute;
+        visibility: hidden;
+    }
+
+    background: url("../../icons/popout.svg") no-repeat center;
+    background-size: 14px;
+    border: 0;
+    cursor: pointer;
+    display: block;
+    height: 32px;
+    margin: 0;
+    opacity: 0.75;
+    overflow: hidden;
+    padding: 32px 0 0 32px;
+    transition: opacity 250ms ease;
+    width: 32px;
+
+    &:hover {
+        opacity: 1;
+    }
 }

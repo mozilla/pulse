@@ -6,8 +6,37 @@
     <title>Pulse</title>
   </head>
   <body>
-    <p>The popup!</p>
-    <button class="open--trigger">Open this in a new tab.</button>
+    <header>
+      <h1>Pulse</h1>
+      <button class="open--trigger">Open this in a new tab.</button>
+    </header>
+    <main>
+      <form>
+          <div class="fieldset">
+              <h2>How are things?</h2>
+              <select>
+                  <option>Great!</option>
+                  <option>Terrible!</option>
+              </select>
+          </div>
+          <div class="fieldset">
+              <h2>Why's that?</h2>
+              <select>
+                  <option>It's slow.</option>
+                  <option>It's broken.</option>
+                  <option>It's janky.</option>
+                  <option>I don't like the content.</option>
+              </select>
+          </div>
+          <div class="fieldset">
+              <h2>Any other thoughts?</h2>
+              <textarea>
+
+              </textarea>
+          </div>
+          <button>Thanks!</button>
+      </form>
+    </main>
     <script src="/survey/survey.js"></script>
   </body>
 </html>
