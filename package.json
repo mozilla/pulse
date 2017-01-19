@@ -9,6 +9,9 @@
   "homepage": "https://testpilot.firefox.com/experiments/pulse",
   "hasEmbeddedWebExtension": true,
   "dependencies": {
+    "babel-core": "^6.21.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-latest": "^6.16.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.1",
     "jpm": "^1.2.2",
@@ -23,6 +26,7 @@
     "64": "webextension/icons/pulse-64.png"
   },
   "scripts": {
-    "build": "./node_modules/webpack/bin/webpack.js"
+    "build": "./node_modules/webpack/bin/webpack.js",
+    "watch": "./node_modules/webpack/bin/webpack.js --watch"
   }
 }

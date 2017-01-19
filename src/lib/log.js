@@ -1,13 +1,13 @@
-function Logger(prefix, console) {
-  this.console = console;
-  this.prefix = `[pulse.${prefix}]`;
+export default class Logger {
+  constructor(prefix, console) {
+    this.console = console;
+    this.prefix = `[pulse.${prefix}]`;
+
+    ['info', 'log', 'warn', 'error'].forEach(method => {
+      this[method] = function() {
+        this.console[method].apply(this.console[method], [this.prefix, ...arguments]);
+      };
+      this[method] = this[method].bind(this);
+    });
+  }
 }
-
-['info', 'log', 'warn', 'error'].forEach(method => {
-  Logger.prototype[method] = function() {
-    this.console[method].apply(this.console, [this.prefix, ...arguments]);
-  };
-});
-
-
-exports.Logger = Logger;

@@ -3,6 +3,8 @@ const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
 const WebpackShellPlugin = require('webpack-shell-plugin');
 
 
+const WATCH_MODE = process.argv.includes('--watch');
+
 module.exports = {
   output: {
     path: 'build',
@@ -23,12 +25,23 @@ module.exports = {
       if(/^sdk\//.test(request)){
         return callback(null, `commonjs ${request}`);
       }
-      callback();
+      return callback();
     }
   ],
 
   module: {
     loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: [
+            'es2015'
+          ]
+        }
+      },
+
       // Appropriately precompile SCSS files.
       {
         test: /\.scss$/,
@@ -55,7 +68,9 @@ module.exports = {
     new WebpackShellPlugin({
       onBuildEnd: [
         'mkdir -p dist',
-        'jpm xpi --addon-dir=build --dest-dir=dist'
+        WATCH_MODE ?
+          'jpm post --addon-dir=build --post-url http://localhost:8888/' :
+          'jpm xpi --addon-dir=build --dest-dir=dist'
       ]
     }),
 

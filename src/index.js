@@ -1,7 +1,9 @@
-const webext = require('sdk/webextension');
-const { getMostRecentBrowserWindow } = require('sdk/window/utils');
-const { Logger } = require('./lib/log');
-const logger = new Logger('index', getMostRecentBrowserWindow().console);
+import webext from 'sdk/webextension';
+import { getMostRecentBrowserWindow } from 'sdk/window/utils';
+import Logger from './lib/log';
+
+const logger = new Logger('sdk.index', getMostRecentBrowserWindow().console);
+
 
 logger.log('SDK startup');
 

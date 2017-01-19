@@ -1,9 +1,8 @@
-const styles = require('./styles.scss');
+import styles from './styles.scss';
+import Logger from '../../lib/log';
+import Open from './lib/open';
 
-const { Logger } = require('../../lib/log');
-const Open = require('./lib/open');
-
-const logger = new Logger('survey', window.console);
+const logger = new Logger('webext.survey', window.console);
 
 
 function main() {
