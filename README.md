@@ -20,7 +20,12 @@ Pulse is an upcoming [Test Pilot](https://testpilot.firefox.com) experiment that
     npm install
     ```
  
-1. Run the following comment to build the extension and install it to Firefox. While running, it will watch for changes and update the browser to the latest version of the add-on.
+1. Run the following command to build the extension and install it to Firefox. While running, it will watch for changes and update the browser to the latest version of the add-on:
+
+    ```sh
+    npm run watch
+    ```
+
 1. Use the [Browser Console](https://developer.mozilla.org/docs/Tools/Browser_Console) to debug. Filter the log with `pulse.` to filter out messages not logged by Pulse.
 
 
