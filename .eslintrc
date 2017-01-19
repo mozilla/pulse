@@ -12,6 +12,6 @@
     "sourceType": "module"
   },
   "rules": {
-    "quotes": ["error", "double"]
+    "quotes": ["error", "single"]
   }
 }
