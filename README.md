@@ -48,7 +48,7 @@ While the WebExtension:
 
 ## Style
 
-Pulse follows the default formatting recommendations provided by [`prettier`](https://github.com/jlongster/prettier). To lint the source tree:
+Pulse follows the default formatting recommendations provided by [`prettier`](https://github.com/jlongster/prettier), but with single quotes. To lint the source tree:
 
 ```sh
 npm run lint
