@@ -1,5 +1,5 @@
+// eslint-disable-next-line no-unused-vars
 import styles from './styles.scss';
-// eslint-disable-line no-unused-vars
 import Logger from '../../lib/log';
 import Open from './lib/open';
 
