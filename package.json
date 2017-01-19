@@ -16,6 +16,7 @@
     "css-loader": "^0.26.1",
     "jpm": "^1.2.2",
     "node-sass": "^4.1.1",
+    "prettier": "0.0.9",
     "sass-loader": "^4.1.1",
     "style-loader": "^0.13.1",
     "webpack": "^1.14.0",
@@ -27,6 +28,7 @@
   },
   "scripts": {
     "build": "./node_modules/webpack/bin/webpack.js",
-    "watch": "./node_modules/webpack/bin/webpack.js --watch"
+    "watch": "./node_modules/webpack/bin/webpack.js --watch",
+    "prettier": "./node_modules/prettier/bin/prettier.js --write src/**/*.js webpack.config.js"
   }
 }
