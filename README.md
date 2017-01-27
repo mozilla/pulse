@@ -54,6 +54,8 @@ Pulse follows the default formatting recommendations provided by [`prettier`](ht
 npm run lint
 ```
 
+Builds will fail if linting fails.
+
 To automatically clean up the working tree, run:
 
 ```sh
