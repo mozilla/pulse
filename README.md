@@ -2,6 +2,9 @@
 
 
 # pulse
+i
+[![Available on Test Pilot](https://img.shields.io/badge/available_on-Test_Pilot-0996F8.svg)](https://testpilot.firefox.com/experiments/pulse)
+[![CircleCI](https://img.shields.io/circleci/project/github/RedSparr0w/node-csgo-parser.svg)](https://circleci.com/gh/mozilla/pulse)
 
 Pulse is an upcoming [Test Pilot](https://testpilot.firefox.com) experiment that intends to align user satisfaction and perceived performance with more traditional performance metrics.
 
