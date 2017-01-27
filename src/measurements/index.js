@@ -1,4 +1,6 @@
-const measurements = [];
+import TelemetryId from './telemetry-id';
+
+const measurements = [ TelemetryId ];
 
 export default survey => {
   return new Promise((resolve, reject) => {
