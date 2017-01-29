@@ -12,7 +12,7 @@ export default class Open {
   handleClick(evt) {
     if (evt.target.classList.contains(this.className)) {
       logger.log('Opening survey in new tab.');
-      browser.tabs.create({ url: '/survey/index.html' });
+      browser.tabs.create({ url: window.location.href });
     }
   }
 }

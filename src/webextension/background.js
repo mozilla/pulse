@@ -1,4 +1,5 @@
 import Logger from '../lib/log';
+import { showPageAction } from './lib/util';
 
 const logger = new Logger('webext.background', console);
 
@@ -6,14 +7,14 @@ const logger = new Logger('webext.background', console);
 browser.tabs.query({}).then(tabs => {
   for (let tab of tabs) {
     logger.log('Loaded pageAction into existing tab', tab.id);
-    browser.pageAction.show(tab.id);
+    showPageAction(tab);
   }
 });
 
 // Show the page action on new tabs.
 browser.tabs.onCreated.addListener(tab => {
   logger.log('Loaded pageAction into new tab', tab.id);
-  browser.pageAction.show(tab.id);
+  showPageAction(tab);
 });
 
 // Handle clicks on the pageAction icon.
