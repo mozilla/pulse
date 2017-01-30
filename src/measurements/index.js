@@ -2,6 +2,7 @@ import { storage } from 'sdk/simple-storage';
 import { getMostRecentBrowserWindow } from 'sdk/window/utils';
 import Logger from '../lib/log';
 
+import Channel from './channel';
 import TelemetryId from './telemetry-id';
 import Version from './version';
 
@@ -10,7 +11,7 @@ const logger = new Logger(
   getMostRecentBrowserWindow().console
 );
 
-const MEASUREMENTS = [ TelemetryId, Version ];
+const MEASUREMENTS = [ Channel, TelemetryId, Version ];
 
 // Passed the output from the survey, augments that data with each measurment
 // in MEASUREMENTS and returns a promise resolving to a Map containing the full
