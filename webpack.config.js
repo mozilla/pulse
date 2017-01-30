@@ -37,6 +37,7 @@ module.exports = {
   plugins: [
     // Copy non-transformed files to build directory.
     new CopyWebpackPlugin([
+      { from: 'src/data', to: 'data' },
       { from: 'src/icons', to: 'webextension/icons' },
       { from: 'src/webextension/manifest.json', to: 'webextension' },
       { from: 'src/webextension/survey/index.html', to: 'webextension/survey' },
