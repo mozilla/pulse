@@ -1,15 +1,15 @@
 import { storage } from 'sdk/simple-storage';
 import { getMostRecentBrowserWindow } from 'sdk/window/utils';
+import Logger from '../lib/log';
 
+import Protocol from './protocol';
 import TelemetryId from './telemetry-id';
 
-import Logger from '../lib/log';
+const MEASUREMENTS = [ Protocol, TelemetryId ];
 const logger = new Logger(
   'sdk.measurements',
   getMostRecentBrowserWindow().console
 );
-
-const MEASUREMENTS = [ TelemetryId ];
 
 // Passed the output from the survey, augments that data with each measurment
 // in MEASUREMENTS and returns a promise resolving to a Map containing the full
