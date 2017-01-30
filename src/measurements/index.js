@@ -1,5 +1,5 @@
 import TelemetryId from './telemetry-id';
-import { getTab } from '../lib/utils';
+import { getContext } from '../lib/utils';
 
 const MEASUREMENTS = [ TelemetryId ];
 
@@ -7,7 +7,7 @@ const MEASUREMENTS = [ TelemetryId ];
 // in MEASUREMENTS and returns a promise resolving to a Map containing the full
 // payload, ready for submission to telemetry.
 export default survey => {
-  const { tab, window } = getTab(survey.get('tab'), survey.get('window'));
+  const { tab, window } = getContext(survey.get('tab'), survey.get('window'));
   return new Promise((resolve, reject) => {
     Promise
       .all(
