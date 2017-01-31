@@ -1,10 +1,17 @@
 import self from 'sdk/self';
+import { viewFor } from 'sdk/view/core';
+
+import Logger from '../lib/log';
 
 export default class BaseMeasurement {
   constructor(tab, window, survey) {
     this.tab = tab;
-    this.window = window;
+    this.window = viewFor(tab.window);
     this.survey = survey;
+    this.logger = new Logger(
+      `sdk.measurement.${this.constructor.name.toLowerCase()}`,
+      this.window.console
+    );
   }
 
   getValue() {
