@@ -13,7 +13,7 @@ export default class Channel extends BaseMeasurement {
       resolve(NIGHTLY);
     } else if (AppConstants.MOZ_DEV_EDITION) {
       resolve(DEVELOPER);
-    } else if (AppConstants.RELEASE_OR_BETA && system.version.includes('b') ) {
+    } else if (AppConstants.RELEASE_OR_BETA && system.version.includes('b')) {
       resolve(BETA);
     } else {
       resolve(RELEASE);

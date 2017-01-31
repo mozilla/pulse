@@ -2,15 +2,22 @@
   "env": {
     "browser": true,
     "es6": true,
-    "node": true
+    "node": true,
+    "webextensions": true
   },
-  "extends": "eslint:recommended",
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
   "globals": {
     "browser": false
   },
   "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
     "sourceType": "module"
   },
+  "plugins": [
+    "react"
+  ],
   "rules": {
     "quotes": ["error", "single"]
   }
