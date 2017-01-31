@@ -1,6 +1,7 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
-const WebpackShellPlugin = require('webpack-shell-plugin');
+const AfterBuildPlugin = require('./lib/webpack-after-build');
+
+const { exec, mkdir } = require('shelljs');
 
 const WATCH_MODE = process.argv.includes('--watch');
 
@@ -45,15 +46,13 @@ module.exports = {
       { from: 'LICENSE' }
     ]),
     // Package add-on when finished with build.
-    new WebpackShellPlugin({
-      onBuildEnd: [
-        'mkdir -p dist',
+    new AfterBuildPlugin(() => {
+      mkdir('-p', 'dist');
+      exec(
         WATCH_MODE
           ? 'jpm post --addon-dir=build --post-url http://localhost:8888/'
           : 'jpm xpi --addon-dir=build --dest-dir=dist'
-      ]
+      );
     }),
-    // Clean up extraneous files from the build directory.
-    new WebpackCleanupPlugin()
   ]
 };
