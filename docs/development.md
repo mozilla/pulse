@@ -40,6 +40,17 @@ While the WebExtension:
 - Serves the survey to collect information from the user.
 
 
+### Survey
+
+Because extensions cannot run content scripts on other extensions' hosted pages, you cannot use the [React Developer Tools](https://addons.mozilla.org/firefox/addon/react-devtools/) to debug the survey in context of the add-on. To work around this, a command is included to run the survey from a development server:
+
+``` bash
+npm run survey
+```
+
+While the server is running, it can be accessed at [http://localhost:8080/webextension/survey/](http://localhost:8080/webextension/survey/). The survey bundle is recompiled with each change, but is not hot reloaded.
+
+
 ## Style
 
 Pulse follows the default formatting recommendations provided by [`prettier`](https://github.com/jlongster/prettier), but with single quotes. To lint the source tree:

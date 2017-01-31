@@ -1,6 +1,6 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const AfterBuildPlugin = require('./lib/webpack-after-build');
-
+const webpack = require('webpack');
 const { exec, mkdir } = require('shelljs');
 
 const WATCH_MODE = process.argv.includes('--watch');
@@ -11,7 +11,7 @@ module.exports = {
   // and survey (used both as a WebExtension popup and as a navigable page).
   entry: {
     'webextension/background': './src/webextension/background.js',
-    'webextension/survey/survey': './src/webextension/survey/survey.js',
+    'webextension/survey/index': './src/webextension/survey/index.jsx',
     index: './src/index.js'
   },
   externals: [
@@ -31,11 +31,20 @@ module.exports = {
         loader: 'babel-loader',
         query: { presets: [ 'es2015' ] }
       },
+      {
+        test: /\.jsx$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: { presets: [ 'es2015', 'react' ] }
+      },
       // Appropriately precompile SCSS files.
       { test: /\.scss$/, loaders: [ 'style', 'css', 'sass' ] }
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': `"${process.env.NODE_ENV || 'dev'}"`
+    }),
     // Copy non-transformed files to build directory.
     new CopyWebpackPlugin([
       { from: 'src/data', to: 'data' },
@@ -53,6 +62,6 @@ module.exports = {
           ? 'jpm post --addon-dir=build --post-url http://localhost:8888/'
           : 'jpm xpi --addon-dir=build --dest-dir=dist'
       );
-    }),
+    })
   ]
 };

@@ -12,19 +12,27 @@
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
     "babel-preset-latest": "^6.16.0",
+    "babel-preset-react": "^6.22.0",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.1",
     "eslint": "^3.13.1",
+    "eslint-plugin-react": "^6.9.0",
     "jpm": "^1.2.2",
     "node-sass": "^4.1.1",
     "on-build-webpack": "^0.1.0",
     "prettier": "^0.11.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "react-redux": "^5.0.2",
+    "redux": "^3.6.0",
+    "redux-form": "^6.5.0",
     "sass-loader": "^4.1.1",
     "shelljs": "^0.7.6",
     "style-loader": "^0.13.1",
     "urijs": "^1.18.4",
     "uuid": "^3.0.1",
-    "webpack": "^1.14.0"
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.3"
   },
   "icon": {
     "64": "webextension/icons/pulse-64.png"
@@ -34,9 +42,10 @@
     "url": "git+https://github.com/mozilla/pulse.git"
   },
   "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch",
-    "prettier": "prettier --single-quote --write 'src/**/*.js' webpack.config.js",
-    "lint": "eslint ."
+    "build": "NODE_ENV=dev webpack",
+    "watch": "NODE_ENV=dev webpack --watch",
+    "prettier": "prettier --single-quote --write src/**/*.{js,jsx}",
+    "lint": "eslint . --ext .js --ext .jsx",
+    "survey": "webpack-dev-server --content-base build/"
   }
 }
