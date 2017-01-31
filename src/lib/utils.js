@@ -15,5 +15,5 @@ export const getContext = (tabId, windowId) => {
       return { tab, window: tab.window };
     }
   }
-  throw(`Could not find window/tab pair ${windowId}/${tabId}.`);
+  throw `Could not find window/tab pair ${windowId}/${tabId}.`;
 };
