@@ -42,7 +42,7 @@ module.exports = {
       { from: 'src/webextension/manifest.json', to: 'webextension' },
       { from: 'src/webextension/survey/index.html', to: 'webextension/survey' },
       { from: 'package.json' },
-      { from: 'LICENSE.md' }
+      { from: 'LICENSE' }
     ]),
     // Package add-on when finished with build.
     new WebpackShellPlugin({
