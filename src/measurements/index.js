@@ -7,6 +7,7 @@ import Addons from './addons';
 import Channel from './channel';
 import OpenTabs from './open-tabs';
 import OpenWindows from './open-windows';
+import Platform from './platform';
 import TelemetryId from './telemetry-id';
 import Version from './version';
 
@@ -16,6 +17,7 @@ const MEASUREMENTS = [
   Channel,
   OpenTabs,
   OpenWindows,
+  Platform,
   TelemetryId,
   Version
 ];
