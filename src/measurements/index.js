@@ -3,9 +3,10 @@ import { getMostRecentBrowserWindow } from 'sdk/window/utils';
 import Logger from '../lib/log';
 
 import AdBlocker from './ad-blocker';
+import Addons from './addons';
 import TelemetryId from './telemetry-id';
 
-const MEASUREMENTS = [ AdBlocker, TelemetryId ];
+const MEASUREMENTS = [ AdBlocker, Addons, TelemetryId ];
 const logger = new Logger(
   'sdk.measurements',
   getMostRecentBrowserWindow().console
