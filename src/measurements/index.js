@@ -4,16 +4,20 @@ import Logger from '../lib/log';
 
 import AdBlocker from './ad-blocker';
 import Addons from './addons';
+import Channel from './channel';
 import OpenTabs from './open-tabs';
 import OpenWindows from './open-windows';
 import TelemetryId from './telemetry-id';
+import Version from './version';
 
 const MEASUREMENTS = [
   AdBlocker,
   Addons,
+  Channel,
   OpenTabs,
   OpenWindows,
-  TelemetryId
+  TelemetryId,
+  Version
 ];
 const logger = new Logger(
   'sdk.measurements',
