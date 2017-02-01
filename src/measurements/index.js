@@ -8,6 +8,7 @@ import Channel from './channel';
 import OpenTabs from './open-tabs';
 import OpenWindows from './open-windows';
 import Platform from './platform';
+import Protocol from './protocol';
 import TelemetryId from './telemetry-id';
 import Version from './version';
 
@@ -18,6 +19,7 @@ const MEASUREMENTS = [
   OpenTabs,
   OpenWindows,
   Platform,
+  Protocol,
   TelemetryId,
   Version
 ];
