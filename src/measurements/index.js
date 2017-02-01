@@ -6,6 +6,7 @@ import AdBlocker from './ad-blocker';
 import Addons from './addons';
 import Channel from './channel';
 import Hostname from './hostname';
+import Language from './language';
 import OpenTabs from './open-tabs';
 import OpenWindows from './open-windows';
 import Platform from './platform';
@@ -18,6 +19,7 @@ const MEASUREMENTS = [
   Addons,
   Channel,
   Hostname,
+  Language,
   OpenTabs,
   OpenWindows,
   Platform,
