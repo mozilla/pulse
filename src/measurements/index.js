@@ -17,7 +17,7 @@ const MEASUREMENTS = [
   Channel,
   OpenTabs,
   OpenWindows,
-  Platform
+  Platform,
   TelemetryId,
   Version
 ];
