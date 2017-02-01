@@ -4,10 +4,17 @@ import Logger from '../lib/log';
 
 import AdBlocker from './ad-blocker';
 import Addons from './addons';
+import OpenTabs from './open-tabs';
 import OpenWindows from './open-windows';
 import TelemetryId from './telemetry-id';
 
-const MEASUREMENTS = [ AdBlocker, Addons, OpenWindows, TelemetryId ];
+const MEASUREMENTS = [
+  AdBlocker,
+  Addons,
+  OpenTabs,
+  OpenWindows,
+  TelemetryId
+];
 const logger = new Logger(
   'sdk.measurements',
   getMostRecentBrowserWindow().console
