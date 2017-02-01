@@ -12,8 +12,8 @@ import Version from './version';
 
 const MEASUREMENTS = [
   AdBlocker,
-  Channel
   Addons,
+  Channel,
   OpenTabs,
   OpenWindows,
   TelemetryId,
