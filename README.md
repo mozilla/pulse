@@ -2,7 +2,6 @@
 
 
 # pulse
-i
 [![Available on Test Pilot](https://img.shields.io/badge/available_on-Test_Pilot-0996F8.svg)](https://testpilot.firefox.com/experiments/pulse)
 [![CircleCI](https://img.shields.io/circleci/project/github/RedSparr0w/node-csgo-parser.svg)](https://circleci.com/gh/mozilla/pulse)
 
@@ -68,6 +67,6 @@ npm run prettier
 
 ## More Information
 
-- License: [MIT](license.md)
+- License: [MPL-2.0](LICENSE)
 - Code of conduct: Based on the [Contributor Covenant](code_of_conduct.md)
 - IRC: `#testpilot` on irc.mozilla.org
