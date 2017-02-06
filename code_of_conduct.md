@@ -1,4 +1,4 @@
-[👈 Back to README](../README.md)
+[👈 Back to README](README.md)
 
 # Contributor Code of Conduct
 
