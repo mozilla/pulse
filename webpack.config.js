@@ -53,6 +53,6 @@ module.exports = {
           ? 'jpm post --addon-dir=build --post-url http://localhost:8888/'
           : 'jpm xpi --addon-dir=build --dest-dir=dist'
       );
-    }),
+    })
   ]
 };

@@ -12,6 +12,11 @@ import OpenWindows from './open-windows';
 import Platform from './platform';
 import Protocol from './protocol';
 import TelemetryId from './telemetry-id';
+import TimerContentLoaded from './timer-content-loaded';
+import TimerFirstInteraction from './timer-first-interaction';
+import TimerFirstPaint from './timer-first-paint';
+import TimerWindowLoad from './timer-window-load';
+import Timestamp from './timestamp';
 import Version from './version';
 
 const MEASUREMENTS = [
@@ -25,6 +30,11 @@ const MEASUREMENTS = [
   Platform,
   Protocol,
   TelemetryId,
+  TimerContentLoaded,
+  TimerFirstInteraction,
+  TimerFirstPaint,
+  TimerWindowLoad,
+  Timestamp,
   Version
 ];
 const logger = new Logger(
