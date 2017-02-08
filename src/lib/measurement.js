@@ -8,6 +8,8 @@ export default class BaseMeasurement {
     this.tab = tab;
     this.window = viewFor(tab.window);
     this.survey = survey;
+    this.name = this.constructor.name.charAt(0).toLowerCase() +
+      this.constructor.name.slice(1);
     this.logger = new Logger(
       `sdk.measurement.${this.constructor.name.toLowerCase()}`,
       this.window.console
@@ -16,16 +18,17 @@ export default class BaseMeasurement {
 
   getValue() {
     return new Promise((resolve, reject) => {
-      const innerResolve = val => {
+      this.measure(val => {
         try {
-          const name = this.constructor.name.charAt(0).toLowerCase() +
-            this.constructor.name.slice(1);
-          resolve([ name, val ]);
-        } catch (err) {
+          if (typeof val === 'object' && this.name.hasOwnProperty(val)) {
+            resolve([ this.name, val[this.name] ]);
+          } else {
+            resolve([ this.name, val ]);
+          }
+        } catch(err) {
           reject(err);
         }
-      };
-      this.measure(innerResolve);
+      });
     });
   }
 

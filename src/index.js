@@ -1,3 +1,5 @@
+import { PageMod } from 'sdk/page-mod';
+import self from 'sdk/self';
 import { storage } from 'sdk/simple-storage';
 import webext from 'sdk/webextension';
 import tabs from 'sdk/tabs';
@@ -9,6 +11,12 @@ import measure from './measurements';
 const logger = new Logger('sdk.index', getMostRecentBrowserWindow().console);
 
 logger.log('SDK startup');
+
+PageMod({
+  include: '*',
+  contentScriptFile: self.data.url('pagemonitor.js'),
+  contentScriptWhen: 'start'
+});
 
 // On startup, establish a connection with the embedded WebExtension.
 webext.startup().then(({ browser }) => {
