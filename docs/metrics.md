@@ -187,7 +187,7 @@ Fired upon successful submission of the survey containing the survey data augmen
 - `sessionTimerWindowLoad`: an [aggregation] of `timerWindowLoad` across the session. 
 - `sessionTimerFirstPaint`: an [aggregation] of `timerFirstPaint` across the session.
 - `sessionTimerFirstInteraction`: an [aggregation] of `timerFirstInteraction` across the session.
-- `sessionTimerFirstByte`: an [aggregation] of `timerFirstyte` across the session.
+- `sessionTimerFirstByte`: an [aggregation] of `timerFirstByte` across the session.
 - `sessionRequests`: an object containing an [aggregation] of each type of request spawned by pages across the session.
 - `sessionEngagement`: an [aggregation] of `engagement` across the session.
 
