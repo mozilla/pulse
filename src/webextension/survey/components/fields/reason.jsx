@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { formValueSelector } from 'redux-form';
+import classNames from 'classnames';
 
 export const REASONS = [
   { min: 4, value: 'fast', name: 'It is fast' },
@@ -52,16 +53,16 @@ class ReasonField extends Component {
     );
   }
 
+  renderClassnames() {
+    return classNames('field', 'field--details');
+  }
+
   render() {
-    const { input, sentiment } = this.props;
-    if (!sentiment) {
-      return null;
-    }
+    const { input: { name } } = this.props;
     return (
-      <div className={`field ${this.required}`}>
-        <label htmlFor={input.name}>Because</label>
+      <div className="field field--reason">
+        <label htmlFor={name}>This page is:</label>
         {this.renderSelect()}
-        {input.touched && input.error && <span>{input.error}</span>}
       </div>
     );
   }
