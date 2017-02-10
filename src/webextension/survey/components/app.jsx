@@ -23,15 +23,7 @@ class App extends Component {
     sendMessage('id', defaultValues.id);
 
     // Get `sentiment` and `type` from the querystring.
-    var qs = new Uri(window.location.search).search(true);
-    if (Object.keys(qs).length) {
-      qs = qs.entries().reduce((cumulative, [ key, value ]) => {
-        if ([ 'sentiment', 'type' ].includes(key)) {
-          cumulative[key] = value;
-        }
-      }, {});
-    }
-
+    const qs = new Uri(window.location.search).search(true);
     // Merge the default values and those from the querystring. Then ensure
     // that types are correct, store them, and return them.
     const initialValues = this.initialValues = Object.assign(
@@ -51,12 +43,10 @@ class App extends Component {
 
   render() {
     return (
-      <div className="app">
-        <Survey
-          initialValues={this.getInitialValues()}
-          onSubmit={this.handleSubmit}
-        />
-      </div>
+      <Survey
+        initialValues={this.getInitialValues()}
+        onSubmit={this.handleSubmit}
+      />
     );
   }
 }

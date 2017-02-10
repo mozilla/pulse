@@ -1,21 +1,58 @@
 import React, { Component } from 'react';
 
+export class StarRating extends Component {}
+
 export default class SentimentField extends Component {
+  handleChange(evt) {
+    this.props.input.onChange(evt);
+  }
+
+  renderInput(n) {
+    const { input } = this.props;
+    return (
+      <input
+        name={input.name}
+        type="radio"
+        id={`sentiment-${n}`}
+        value={n}
+        checked={input.value === n}
+        onChange={input.onChange}
+      />
+    );
+  }
+
+  renderLabel(n) {
+    return <label htmlFor={`sentiment-${n}`}>{n}</label>;
+  }
+
+  // This is a bit ugly; it's done this way to ensure that each <label> and
+  // <input> element are siblings, which lets us manage all of the star logic
+  // with CSS alone.
+  renderStars() {
+    return (
+      <div className="field--star">
+        {this.renderInput(5)}
+        {this.renderLabel(5)}
+        {this.renderInput(4)}
+        {this.renderLabel(4)}
+        {this.renderInput(3)}
+        {this.renderLabel(3)}
+        {this.renderInput(2)}
+        {this.renderLabel(2)}
+        {this.renderInput(1)}
+        {this.renderLabel(1)}
+      </div>
+    );
+  }
+
   render() {
     const { input } = this.props;
     return (
-      <div className="field">
-        <label htmlFor={input.name}>
+      <div className="field field--sentiment">
+        <label>
           How would you rate your experience on sitename?
         </label>
-        <select {...input}>
-          <option />
-          {
-            [ 1, 2, 3, 4, 5 ].map(val => (
-              <option key={val} value={val}>{val}</option>
-            ))
-          }
-        </select>
+        {this.renderStars()}
         {input.touched && input.error && <span>{input.error}</span>}
       </div>
     );

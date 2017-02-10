@@ -1,4 +1,4 @@
-![Pulse icon](src/icons/pulse-64.png)
+![Pulse icon](src/icons/pulse-128.png)
 
 # pulse
 [![Available on Test Pilot](https://img.shields.io/badge/available_on-Test_Pilot-0996F8.svg)](https://testpilot.firefox.com/experiments/pulse)

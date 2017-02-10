@@ -38,7 +38,15 @@ module.exports = {
         query: { presets: [ 'es2015', 'react' ] }
       },
       // Appropriately precompile SCSS files.
-      { test: /\.scss$/, loaders: [ 'style', 'css', 'sass' ] }
+      { test: /\.scss$/, loaders: [ 'style', 'css', 'sass' ] },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loader: 'url-loader'
+      },
+      {
+        test: /\.woff?2$/,
+        loader: 'file?name=public/fonts/[name].[ext]'
+      }
     ]
   },
   plugins: [

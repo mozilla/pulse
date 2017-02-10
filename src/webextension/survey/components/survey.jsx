@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
+import Thanks from './thanks.jsx';
 import DetailsField from './fields/details.jsx';
 import SentimentField from './fields/sentiment.jsx';
 import ReasonField from './fields/reason.jsx';
@@ -12,6 +13,13 @@ class Survey extends Component {
     return parseInt(val, 10);
   }
 
+  // This is a horrible anti-pattern in React. Unfortunately, we need to force
+  // the body to have a specific height in order to grow it to the size of the
+  // absolutely-position panel with the remaining fields.
+  addtl(show) {
+    document.body.classList[show ? 'add' : 'remove']('addtl--show');
+  }
+
   renderButton() {
     const { submitting, valid } = this.props;
     return (
@@ -19,6 +27,10 @@ class Survey extends Component {
         {submitting & 'Submitting...' || 'Submit'}
       </button>
     );
+  }
+
+  renderScreen() {
+    return <div className="addtl--screen" onClick={() => this.addtl(false)} />;
   }
 
   renderForm() {
@@ -30,22 +42,29 @@ class Survey extends Component {
           component={SentimentField}
           validate={[ required ]}
           parse={this.parseSentiment}
+          onChange={() => this.addtl(true)}
         />
-        <Field name="reason" component={ReasonField} validate={[ required ]} />
-        <Field name="details" component={DetailsField} />
-        {this.renderButton()}
+        <div className="addtl">
+          <div className="addtl--fields">
+            <Field
+              name="reason"
+              component={ReasonField}
+              validate={[ required ]}
+            />
+            <Field name="details" component={DetailsField} />
+            {this.renderButton()}
+          </div>
+          {this.renderScreen()}
+        </div>
       </form>
     );
-  }
-
-  renderThanks() {
-    return <p>Thanks for filling out the survey!</p>;
   }
 
   render() {
     const { submitSucceeded } = this.props;
     if (submitSucceeded) {
-      return this.renderThanks();
+      this.addtl(false);
+      return <Thanks subheader="Thank you!" />;
     }
     return this.renderForm();
   }
@@ -53,6 +72,7 @@ class Survey extends Component {
 
 Survey.propTypes = {
   handleSubmit: React.PropTypes.func.isRequired,
+  pristine: React.PropTypes.bool.isRequired,
   submitting: React.PropTypes.bool.isRequired,
   submitSucceeded: React.PropTypes.bool.isRequired,
   valid: React.PropTypes.bool.isRequired

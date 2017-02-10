@@ -5,7 +5,9 @@
   "description": "A super sweet catchphrase.",
   "homepage_url": "https://testpilot.firefox.com/experiments/pulse",
   "icons": {
-    "48": "icons/pulse-64.png"
+    "48": "icons/pulse-48.png",
+    "64": "icons/pulse-64.png",
+    "128": "icons/pulse-128.png"
   },
   "applications": {
     "gecko": {
@@ -15,8 +17,8 @@
   },
   "page_action": {
     "browser_style": true,
-    "default_icon": "icons/pulse-64.png",
-    "default_title": "Status update with Pulse.",
+    "default_icon": "icons/pulse-pageaction.png",
+    "default_title": "Pulse",
     "default_popup": "survey/index.html"
   },
   "background": {
