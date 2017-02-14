@@ -1,4 +1,5 @@
 import Logger from '../lib/log';
+import HttpObserver from '../lib/http-observer';
 import { makePageAction } from './lib/util';
 
 const logger = new Logger('webext.background', console);
@@ -13,3 +14,5 @@ browser.tabs.query({}).then(tabs => {
 
 // Show the page action on new tabs.
 browser.tabs.onCreated.addListener(tab => makePageAction(tab));
+
+window.app = { httpObserver: new HttpObserver() };
