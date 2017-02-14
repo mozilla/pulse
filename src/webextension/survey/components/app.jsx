@@ -48,7 +48,7 @@ class App extends Component {
         const requests = backgroundWindow.app.httpObserver.get(tabs[0].id);
         values.requests = requests;
         window.submitted = true;
-        sendMessage('submission', values);
+        sendMessage('submitted', values);
       });
   }
 

@@ -59,7 +59,7 @@ export default class HttpObserver {
   // Whenever a request is made, log some initial metadata. Only do this if the
   // instance was listening at webNavigation.onBeforeNavigate.
   requestListener(details) {
-    if (details.tabId in this.requests) {
+    if (details.tabId >= 0 && details.tabId in this.requests) {
       this.requests[details.tabId][details.requestId] = {
         start: details.timeStamp,
         url: details.url,
@@ -72,7 +72,8 @@ export default class HttpObserver {
   // the instance was listening at webNavigation.onBeforeNavigate.
   responseListener(details) {
     if (
-      details.tabId in this.requests &&
+      details.tabId >= 0 &&
+        details.tabId in this.requests &&
         details.requestId in this.requests[details.tabId]
     ) {
       const request = this.requests[details.tabId][details.requestId];
@@ -84,8 +85,6 @@ export default class HttpObserver {
         completed: true,
         cdn: this.isCDN(details.url, details.responseHeaders)
       });
-    } else {
-      logger.warn('Unable to find request.');
     }
   }
 
