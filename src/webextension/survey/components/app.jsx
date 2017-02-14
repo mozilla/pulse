@@ -38,7 +38,16 @@ class App extends Component {
   }
 
   handleSubmit(values) {
-    sendMessage('submission', values);
+    Promise
+      .all([
+        browser.tabs.query({ active: true, currentWindow: true }),
+        browser.runtime.getBackgroundPage()
+      ])
+      .then(([ tabs, backgroundWindow ]) => {
+        const requests = backgroundWindow.app.httpObserver.get(tabs[0].id);
+        values.requests = requests;
+        sendMessage('submission', values);
+      });
   }
 
   render() {

@@ -4,11 +4,20 @@ if (typeof window.pulse === 'undefined') {
 
 // Whenever the window receives the pulse-get-pagemonitor event, respond with
 // the full window.pulse object in a pulse-send-pagemonitor event.
-window.addEventListener('pulse-get-pagemonitor', () => {
-  var sendEvent = document.createEvent('CustomEvent');
-  sendEvent.initCustomEvent('pulse-send-pagemonitor', true, true, window.pulse);
-  document.documentElement.dispatchEvent(sendEvent);
-}, false);
+window.addEventListener(
+  'pulse-get-pagemonitor',
+  () => {
+    var sendEvent = document.createEvent('CustomEvent');
+    sendEvent.initCustomEvent(
+      'pulse-send-pagemonitor',
+      true,
+      true,
+      window.pulse
+    );
+    document.documentElement.dispatchEvent(sendEvent);
+  },
+  false
+);
 
 // Utilities for working with timers.
 const now = () => new Date().getTime();

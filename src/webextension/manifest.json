@@ -15,6 +15,11 @@
       "strict_min_version": "51.0"
     }
   },
+  "permissions": [
+    "webNavigation",
+    "webRequest",
+    "<all_urls>"
+  ],
   "page_action": {
     "browser_style": true,
     "default_icon": "icons/pulse-pageaction.png",
