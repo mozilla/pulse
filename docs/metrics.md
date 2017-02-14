@@ -157,29 +157,41 @@ Fired upon successful submission of the survey containing the survey data augmen
 - `timerFirstPaint`: the number of milliseconds between the start of the page load and the first paint.
 - `timerFirstInteraction`: the number of milliseconds between the start of the page load and the first of the following events: `click`, `touch`, `scroll`, `keypress`. `null` if none of these events took place.
 - `timerFirstByte`: the number of milliseconds between the start of the request and the time the first byte was received.
-- `requests`: an object containing information about requests spawned by the page. Each member key indicates the type of request, categorized in the same way as the [Firefox Developer Tools Network Monitor](https://developer.mozilla.org/docs/Tools/Network_Monitor):
+- `requests`: an object containing information about requests spawned by the page. Each member key indicates the type of request, categorized as [`webRequest.ResourceType`s](https://developer.mozilla.org/Add-ons/WebExtensions/API/webRequest/ResourceType):
 
-  * `html`: HTML files
-  * `css`: Cascading style sheets
-  * `js`: JavaScript
-  * `xhr`: files retrieved by `XMLHttpRequest`
-  * `fonts`: non-system fonts
-  * `images`: image files
-  * `media`: audio and video files
-  * `flash`: Flash embeds
-  * `ws`: WebSocket connections
-  * `other`: anything not covered in the above categories
-  * `all`: all requests summed.
+  * `beacon`
+  * `csp_report`
+  * `font`
+  * `image`
+  * `imageset`
+  * `main_frame`
+  * `media`
+  * `object`
+  * `other`
+  * `ping`
+  * `script`
+  * `stylesheet`
+  * `sub_frame`
+  * `web_manifest`
+  * `websocket`
+  * `xbl`
+  * `xml_dtd`
+  * `xmlhttprequest`
+  * `xslt`
+  
+  With one special value:
 
+  * `all`: all requests of all types, summed.
+  
   Each value of the object contains three data points:
 
-  * `num`: the number of requests of that type
-  * `size`: the summed filesize of requests of that type, in bytes.
+  * `num`: the number of requests of that type.
+  * `cached`: the proportion of requests of that type that were read from cache.
+  * `cdn`: the proportion of requests of that that were retrieved from a CDN.
   * `time`: the time it took to load those files.
 
 - `disconnectRequests`: the number of requests made to hosts on the [disconnect.me tracking protection blocklist](https://disconnect.me/trackerprotection).
 - `consoleErrors`: the number of errors logged to the browser console.
-- `amountCached`: a number indicating the proportion of requests returning `304` status codes, between `0.0` and `1.0`.
 - `engagement`: a number indicating the engagement score for the page. See [Appendix C] for more information.
 - `sessionSize`: the number of page visits in the session.
 - `sessionLength`: the number of milliseconds elapsed in a session.
@@ -224,21 +236,29 @@ Fired upon successful submission of the survey containing the survey data augmen
   "timerFirstInteraction": 1300,
   "timerFirstByte": 19,
   "requests": {
-    "html":   { "num": 1,   "size": 237198,  "time": 274  },
-    "css":    { ... },
-    "js":     { ... },
-    "xhr":    { ... },
-    "fonts":  { ... },
-    "images": { ... },
-    "media":  { ... },
-    "flash":  { ... },
-    "ws":     { ... },
-    "other":  { ... },
-    "all":    { ... }
+    "all":            { "num": 1, "cached": 0.123, "cdn": 0.4, "time": 274 },
+    "main_frame":     { ... },
+    "sub_frame":      { ... },
+    "stylesheet":     { ... },
+    "script":         { ... },
+    "image":          { ... },
+    "object":         { ... },
+    "xmlhttprequest": { ... },
+    "xbl":            { ... },
+    "xslt":           { ... },
+    "ping":           { ... },
+    "beacon":         { ... },
+    "xml_dtd":        { ... },
+    "font":           { ... },
+    "media":          { ... },
+    "websocket":      { ... },
+    "csp_report":     { ... },
+    "imageset":       { ... },
+    "web_manifest":   { ... },
+    "other":          { ... }
   },
   "disconnectRequests": 17,
   "consoleErrors": 7,
-  "amountCached": 0.4,
   "engagement": 77.9,
   "sessionSize": 24,
   "sessionLength": 1411080,
@@ -269,33 +289,47 @@ Fired upon successful submission of the survey containing the survey data augmen
     "deciles": [ 18, 23, 26, 30, 31, 34, 37, 44, 59 ]
   },
   "sessionRequests": {
-    "html":   {
+    "all":   {
       "num": {
         "num": 24,
         "total": 30,
         "deciles": [ 1, 1, 1, 1, 1, 1, 1, 2, 4 ]
       },
-      "size": {
+      "cached": {
         "num": 24,
-        "total": 5692752,
-        "deciles": [ 110094, 142434, 177343, 198474, 237198, 281235, 339484, 491452, 892894 ]
+        "mean": 0.14,
+        "deciles": [ 0.01, 0.04, 0.1, 0.12, 0.14, 0.21, 0.40, 0.56, 0.81 ]
+      },
+      "cdn": {
+        "num": 24,
+        "mean": 0.33,
+        "deciles": [ 0.12, 0.15, 0.19, 0.22, 0.34, 0.41, 0.47, 0.49, 0.55 ]
       },
       "time": {
         "num": 24,
         "total": 6576,
-        "declines": [ 165, 182, 214, 244, 274, 333, 356, 420, 513 ]
+        "deciles": [ 165, 182, 214, 244, 274, 333, 356, 420, 513 ]
       }
     },
-    "css":    { ... },
-    "js":     { ... },
-    "xhr":    { ... },
-    "fonts":  { ... },
-    "images": { ... },
-    "media":  { ... },
-    "flash":  { ... },
-    "ws":     { ... },
-    "other":  { ... },
-    "all":    { ... }
+    "main_frame":     { ... },
+    "sub_frame":      { ... },
+    "stylesheet":     { ... },
+    "script":         { ... },
+    "image":          { ... },
+    "object":         { ... },
+    "xmlhttprequest": { ... },
+    "xbl":            { ... },
+    "xslt":           { ... },
+    "ping":           { ... },
+    "beacon":         { ... },
+    "xml_dtd":        { ... },
+    "font":           { ... },
+    "media":          { ... },
+    "websocket":      { ... },
+    "csp_report":     { ... },
+    "imageset":       { ... },
+    "web_manifest":   { ... },
+    "other":          { ... }
   },
   "sessionEngagement": {
     "num": 24,
@@ -332,12 +366,13 @@ A normalized score tracking a user's engagement to the page; specifics are to be
 
 ### Appendix D: Aggregated Properties
 
-To provide more insight into numbers aggregatd across multiple pages, some fields are reported as an object containing the count, sum, number of null values, and decile partitions, e.g.
+To provide more insight into numbers aggregated across multiple pages, some fields are reported as an object containing the count, sum, mean, number of null values, and decile partitions, e.g.
 
 ```json
 {
     "num": 125,
     "total": 151304,
+    "mean": 1210.432,
     "deciles": [ 224, 536, 766, 972, 1297, 1457, 1731, 2076, 2353 ],
     "null": 3
 }
