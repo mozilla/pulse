@@ -6,6 +6,7 @@ import tabs from 'sdk/tabs';
 import { getMostRecentBrowserWindow } from 'sdk/window/utils';
 
 import Logger from './lib/log';
+import sendEvent from './lib/metrics';
 import measure from './measurements';
 
 const logger = new Logger('sdk.index', getMostRecentBrowserWindow().console);
@@ -25,28 +26,54 @@ webext.startup().then(({ browser }) => {
   // Listen for messages from the WebExtension.
   browser.runtime.onMessage.addListener(msg => {
     switch (msg.type) {
-      // If an id is received, associate that ID with the currently-active tab
-      // for future processing.
-      case 'id':
+      // When the survey is loaded, associate the passed ID with the
+      // currently-active tab for future processing. Then send the pulse-loaded
+      // Telemetry ping.
+      case 'loaded': {
         if (!storage.id) {
           storage.id = {};
         }
-        logger.log(`Initializing survey for ${msg.payload}`);
-        storage.id[msg.payload] = tabs.activeTab;
+        storage.id[msg.payload.id] = tabs.activeTab;
+        const loadedPing = {
+          method: 'pulse-loaded',
+          id: msg.payload.id,
+          type: msg.payload.type
+        };
+        logger.log('Loaded', loadedPing);
+        sendEvent(loadedPing);
         break;
+      }
+
+      // When the survey is unloaded without being submitted,
+      case 'unloaded': {
+        const unloadedPing = {
+          method: 'pulse-unloaded',
+          id: msg.payload.id,
+          type: msg.payload.type
+        };
+        logger.log('Unloaded', unloadedPing);
+        sendEvent(unloadedPing);
+        break;
+      }
 
       // When a submission is received, augment it with measurements before
       // submitting.
-      case 'submission':
+      case 'submitted': {
         measure(msg.payload).then(measurements => {
-          logger.log('Submitting', measurements);
+          const submittedPing = Object.assign(msg.payload, measurements, {
+            method: 'pulse-submitted'
+          });
+          logger.log('Submitted', submittedPing);
+          sendEvent(submittedPing);
           delete storage.id[msg.payload.id];
         });
         break;
+      }
 
-      default:
+      default: {
         logger.error('Unknown message type.', msg);
         break;
+      }
     }
   });
 });

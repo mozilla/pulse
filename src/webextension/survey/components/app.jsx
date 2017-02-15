@@ -20,7 +20,8 @@ class App extends Component {
     // Generate a UUID, then send to the host SDK add-on so that it can
     // associate a future submission with the correct tab and window.
     defaultValues.id = uuid();
-    sendMessage('id', defaultValues.id);
+    window.surveyId = defaultValues.id;
+    sendMessage('loaded', { id: defaultValues.id, type: 'user' });
 
     // Get `sentiment` and `type` from the querystring.
     var qs = new Uri(window.location.search).search(true);
@@ -46,7 +47,8 @@ class App extends Component {
   }
 
   handleSubmit(values) {
-    sendMessage('submission', values);
+    window.submitted = true;
+    sendMessage('submitted', values);
   }
 
   render() {

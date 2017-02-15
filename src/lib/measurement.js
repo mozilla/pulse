@@ -25,7 +25,7 @@ export default class BaseMeasurement {
           } else {
             resolve([ this.name, val ]);
           }
-        } catch(err) {
+        } catch (err) {
           reject(err);
         }
       });
