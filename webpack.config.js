@@ -17,7 +17,7 @@ module.exports = {
   externals: [
     // Treat all sdk requires as importable commonjs modules.
     (context, request, callback) => {
-      if (/^sdk\//.test(request) || /^resource\:\/\//.test(request)) {
+      if (/^sdk\//.test(request) || /^resource\:\/\//.test(request) || request === 'chrome') {
         return callback(null, `commonjs ${request}`);
       }
       return callback();

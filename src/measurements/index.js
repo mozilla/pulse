@@ -53,7 +53,17 @@ export default data => {
   return new Promise((resolve, reject) => {
     Promise
       .all(MEASUREMENTS.map(Measure => new Measure(tab, survey).getValue()))
-      .then(data => resolve(new Map([ ...survey, ...data ])))
+      .then(data => {
+        resolve(
+          [ ...survey, ...data ].reduce(
+            (payload, [ key, value ]) => {
+              payload[key] = value;
+              return payload;
+            },
+            {}
+          )
+        );
+      })
       .catch(err => reject(err));
   });
 };
