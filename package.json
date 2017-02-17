@@ -5,7 +5,7 @@
   "description": "Some super sweet catchphrase.",
   "author": "Firefox Test Pilot",
   "license": "MPL-2.0",
-  "version": "0.1.0",
+  "version": "0.9.0",
   "homepage": "https://testpilot.firefox.com/experiments/pulse",
   "hasEmbeddedWebExtension": true,
   "dependencies": {
