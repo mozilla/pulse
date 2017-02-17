@@ -16,6 +16,7 @@
     "classnames": "^2.2.5",
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.26.1",
+    "deploy-txp": "^1.0.7",
     "eslint": "^3.13.1",
     "eslint-plugin-react": "^6.9.0",
     "file-loader": "^0.10.0",
@@ -47,7 +48,9 @@
     "url": "git+https://github.com/mozilla/pulse.git"
   },
   "scripts": {
-    "build": "NODE_ENV=dev webpack",
+    "build": "NODE_ENV=production webpack",
+    "package": "npm run build && mv dist/pulse.xpi addon.xpi",
+    "deploy": "deploy-txp",
     "watch": "NODE_ENV=dev webpack --watch",
     "prettier": "prettier --single-quote --write src/**/*.{js,jsx}",
     "lint": "eslint . --ext .js --ext .jsx",
