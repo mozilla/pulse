@@ -52,5 +52,6 @@
     "prettier": "prettier --single-quote --write src/**/*.{js,jsx}",
     "lint": "eslint . --ext .js --ext .jsx",
     "survey": "webpack-dev-server --content-base build/"
-  }
+  },
+  "updateURL": "https://testpilot.firefox.com/files/pulse@mozilla.com/updates.json"
 }
