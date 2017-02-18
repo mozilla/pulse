@@ -22,6 +22,7 @@
     "file-loader": "^0.10.0",
     "jpm": "^1.2.2",
     "node-sass": "^4.1.1",
+    "npm-run-all": "^4.0.1",
     "on-build-webpack": "^0.1.0",
     "prettier": "^0.11.0",
     "react": "^15.4.2",
@@ -29,6 +30,7 @@
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "redux-form": "^6.5.0",
+    "sass-lint": "^1.10.2",
     "sass-loader": "^4.1.1",
     "shelljs": "^0.7.6",
     "style-loader": "^0.13.1",
@@ -52,8 +54,10 @@
     "package": "npm run build && mv dist/pulse.xpi addon.xpi",
     "deploy": "deploy-txp",
     "watch": "NODE_ENV=dev webpack --watch",
-    "prettier": "prettier --single-quote --write src/**/*.{js,jsx}",
-    "lint": "eslint . --ext .js --ext .jsx",
+    "prettier": "prettier --single-quote --write 'src/**/*.{js,jsx}'",
+    "lint": "npm-run-all lint:*",
+    "lint:js": "eslint . --ext .js --ext .jsx",
+    "lint:sass": "sass-lint -q -v",
     "survey": "webpack-dev-server --content-base build/"
   },
   "updateURL": "https://testpilot.firefox.com/files/pulse@mozilla.com/updates.json"
