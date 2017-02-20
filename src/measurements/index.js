@@ -5,6 +5,7 @@ import Logger from '../lib/log';
 import AdBlocker from './ad-blocker';
 import Addons from './addons';
 import Channel from './channel';
+import ConsoleErrors from './console-errors';
 import Hostname from './hostname';
 import Language from './language';
 import OpenTabs from './open-tabs';
@@ -23,6 +24,7 @@ const MEASUREMENTS = [
   AdBlocker,
   Addons,
   Channel,
+  ConsoleErrors,
   Hostname,
   Language,
   OpenTabs,
