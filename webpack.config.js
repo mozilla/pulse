@@ -1,11 +1,13 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const AfterBuildPlugin = require('./lib/webpack-after-build');
+const BabiliPlugin = require('babili-webpack-plugin');
 const webpack = require('webpack');
 const { exec, mkdir } = require('shelljs');
 
+const PRODUCTION = process.env.NODE_ENV && process.env.NODE_ENV === 'production';
 const WATCH_MODE = process.argv.includes('--watch');
 
-module.exports = {
+const config = {
   output: { path: 'build', filename: '[name].js' },
   // Separate entry points for the SDK add-on, WebExtension background script,
   // and survey (used both as a WebExtension popup and as a navigable page).
@@ -74,3 +76,9 @@ module.exports = {
     })
   ]
 };
+
+if (PRODUCTION) {
+  config.plugins.push(new BabiliPlugin());
+}
+
+module.exports = config;
