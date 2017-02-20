@@ -26,6 +26,10 @@ const elapsed = () => now() - window.pulse.timestamp;
 // The original timestamp
 window.pulse.timestamp = now();
 
+// Keep a running count of console errors.
+window.pulse.consoleErrors = 0;
+window.addEventListener('error', () => ++window.pulse.consoleErrors);
+
 // Log the time elapsed between page load and the window.load event.
 const logWindowLoad = () => {
   window.pulse.timerWindowLoad = elapsed();
