@@ -45,8 +45,8 @@ class App extends Component {
         browser.runtime.getBackgroundPage()
       ])
       .then(([ tabs, backgroundWindow ]) => {
-        const requests = backgroundWindow.app.httpObserver.get(tabs[0].id);
-        values.requests = requests;
+        const requestValues = backgroundWindow.app.httpObserver.get(tabs[0].id);
+        Object.assign(values, requestValues);
         window.submitted = true;
         sendMessage('submitted', values);
       });

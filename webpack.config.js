@@ -39,6 +39,7 @@ module.exports = {
       },
       // Appropriately precompile SCSS files.
       { test: /\.scss$/, loaders: [ 'style', 'css', 'sass' ] },
+      { test: /\.json$/, loader: 'json' },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loader: 'url-loader'
