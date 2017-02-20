@@ -18,6 +18,7 @@ import TimerFirstInteraction from './timer-first-interaction';
 import TimerFirstPaint from './timer-first-paint';
 import TimerWindowLoad from './timer-window-load';
 import Timestamp from './timestamp';
+import TrackingProtection from './tracking-protection';
 import Version from './version';
 
 const MEASUREMENTS = [
@@ -37,6 +38,7 @@ const MEASUREMENTS = [
   TimerFirstPaint,
   TimerWindowLoad,
   Timestamp,
+  TrackingProtection,
   Version
 ];
 const logger = new Logger(

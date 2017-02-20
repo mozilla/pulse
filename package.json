@@ -9,7 +9,8 @@
   "homepage": "https://testpilot.firefox.com/experiments/pulse",
   "hasEmbeddedWebExtension": true,
   "permissions": {
-    "multiprocess": true
+    "multiprocess": true,
+    "private-browsing": true
   },
   "dependencies": {
     "babel-core": "^6.21.0",
