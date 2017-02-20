@@ -44,11 +44,9 @@ class ReasonField extends Component {
     return (
       <select {...input}>
         <option>Select one...</option>
-        {
-          REASONS.map(reason => (
-            <Reason sentiment={sentiment} key={reason.value} {...reason} />
-          ))
-        }
+        {REASONS.map(reason => (
+          <Reason sentiment={sentiment} key={reason.value} {...reason} />
+        ))}
       </select>
     );
   }

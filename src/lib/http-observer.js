@@ -5,6 +5,8 @@ import { CDN_HEADERS, CDN_HOSTNAMES } from './cdn';
 
 const logger = new Logger('webext.lib.http-observer', console);
 
+import disconnectBlocklist from './disconnect';
+
 export const REQUEST_TYPES = [
   'main_frame',
   'sub_frame',
@@ -60,9 +62,11 @@ export default class HttpObserver {
   // instance was listening at webNavigation.onBeforeNavigate.
   requestListener(details) {
     if (details.tabId >= 0 && details.tabId in this.requests) {
+      const hostname = new Uri(details.url).hostname();
       this.requests[details.tabId][details.requestId] = {
         start: details.timeStamp,
         url: details.url,
+        disconnect: disconnectBlocklist.includes(hostname),
         completed: false
       };
     }
@@ -117,30 +121,47 @@ export default class HttpObserver {
   // tab.
   get(tabId) {
     if (tabId in this.requests) {
-      const requestData = Object.assign(
-        {},
-        this.getAll(tabId),
-        this.getTypes(tabId)
-      );
-      logger.log(requestData);
-      return requestData;
+      return {
+        requests: this.getRequests(tabId),
+        disconnectRequests: this.getDisconnectRequests(tabId)
+      };
     }
     logger.log('No requests available.');
     return null;
   }
 
+  getRequests(tabId) {
+    return Object.assign(
+      {},
+      this.getAllRequests(tabId),
+      this.getRequestsByTypes(tabId)
+    );
+  }
+
+  // Passed a tab ID, returns a count of the number of requests in that tab
+  // that were made to hosts on the disconnect.me blocklist.
+  getDisconnectRequests(tabId) {
+    return Object.keys(this.requests[tabId]).reduce(
+      (count, requestId) => {
+        const request = this.requests[tabId][requestId];
+        return request.disconnect ? count + 1 : count;
+      },
+      0
+    );
+  }
+
   // Passed a tab ID, returns an object with a key `all`, mapped to stats for
   // all requests made in that tab.
-  getAll(tabId) {
-    return { all: this.getByType(tabId) };
+  getAllRequests(tabId) {
+    return { all: this.getRequestsByType(tabId) };
   }
 
   // Passed a tab ID, returns an object mapping type => stats about the
   // requests of that type for that tab.
-  getTypes(tabId) {
+  getRequestsByTypes(tabId) {
     return REQUEST_TYPES.reduce(
       (byType, type) => {
-        byType[type] = this.getByType(tabId, type);
+        byType[type] = this.getRequestsByType(tabId, type);
         return byType;
       },
       {}
@@ -149,7 +170,7 @@ export default class HttpObserver {
 
   // Passed a tabId and optional type, returns an object with stats for
   // requests, filtered by type if one was provided.
-  getByType(tabId, type = null) {
+  getRequestsByType(tabId, type = null) {
     const requests = this.filter(tabId, type);
     return {
       num: this.getNum(requests),
