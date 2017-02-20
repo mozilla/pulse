@@ -1,8 +1,10 @@
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const AfterBuildPlugin = require('./lib/webpack-after-build');
-const BabiliPlugin = require('babili-webpack-plugin');
 const webpack = require('webpack');
 const { exec, mkdir } = require('shelljs');
+
+const AfterBuildPlugin = require('./lib/webpack-after-build');
+const BabiliPlugin = require('babili-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const ThrowErrorPlugin = require('./lib/webpack-error');
 
 const PRODUCTION = process.env.NODE_ENV && process.env.NODE_ENV === 'production';
 const WATCH_MODE = process.argv.includes('--watch');
@@ -31,13 +33,13 @@ const config = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        query: { presets: [ 'es2015' ] }
+        query: { presets: [ 'babel-preset-es2015' ] }
       },
       {
         test: /\.jsx$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        query: { presets: [ 'es2015', 'react' ] }
+        query: { presets: [ 'babel-preset-es2015', 'babel-preset-react' ] }
       },
       // Appropriately precompile SCSS files.
       { test: /\.scss$/, loaders: [ 'style', 'css', 'sass' ] },
@@ -53,6 +55,7 @@ const config = {
     ]
   },
   plugins: [
+    new ThrowErrorPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': `"${process.env.NODE_ENV || 'dev'}"`
     }),
