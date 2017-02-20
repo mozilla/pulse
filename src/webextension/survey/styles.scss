@@ -44,7 +44,7 @@ header {
   h1 {
     font-size: 15px;
     font-weight: 600;
-    line-height: 1; 
+    line-height: 1;
   }
 
   h2 {
@@ -92,7 +92,7 @@ button {
     top: 0;
     width: 100%;
   }
-  
+
   &:hover {
     background: #006ECF;
   }
@@ -101,7 +101,7 @@ button {
   &:focus {
     background: #0059AE;
   }
-  
+
   &[disabled] {
     background: #CCC;
     cursor: default;
@@ -111,7 +111,6 @@ button {
 select {
   padding: 1px 8px 1px 4px;
 }
-
 
 .thanks {
   a {
@@ -135,8 +134,8 @@ select {
 
 .addtl--fields {
   align-items: stretch;
-  background: #FbFbFb;
-  border-left: 1px solid #b1b1b1;
+  background: #FBFBFB;
+  border-left: 1px solid #B1B1B1;
   box-shadow: 0 5px 12px 0 rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
@@ -174,7 +173,7 @@ select {
 .field--sentiment {
   flex-wrap: wrap;
   padding-left: 0;
-  
+
   label {
     margin-bottom: 8px;
     width: 100%;
@@ -213,7 +212,7 @@ select {
   input {
     display: none;
   }
-  
+
   label {
     background: url('../../icons/stars.png') no-repeat 3px 3px / 26px;
     cursor: pointer;
@@ -235,6 +234,6 @@ select {
   > label:hover ~ input:checked ~ label,
   > input:checked ~ label:hover ~ label {
     background-position: 3px -38px;
-  } 
+  }
 }
 
