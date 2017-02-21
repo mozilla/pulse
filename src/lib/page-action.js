@@ -35,7 +35,6 @@ export default class PageAction {
     }
     logger.log(`Showing for tab ${tabId}`);
     this.getSitename(tabId).then(sitename => {
-      logger.log('sitename', sitename[0]);
       browser.pageAction.setPopup({
         tabId,
         popup: this.makeSurveyUrl({ sitename })
