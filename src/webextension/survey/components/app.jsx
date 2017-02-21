@@ -25,6 +25,9 @@ class App extends Component {
 
     // Get `sentiment` and `type` from the querystring.
     const qs = new Uri(window.location.search).search(true);
+    if (!qs.sitename) {
+      qs.sitename = 'this site';
+    }
     // Merge the default values and those from the querystring. Then ensure
     // that types are correct, store them, and return them.
     const initialValues = this.initialValues = Object.assign(
