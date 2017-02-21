@@ -5,10 +5,11 @@ const logger = new Logger('webext.lib.page-action', console);
 
 export default class PageAction {
   constructor() {
-    browser.webNavigation.onCommitted.addListener(({ frameId, tabId }) => {
-      if (frameId === 0) {
-        this.make(tabId);
-      }
+    browser.webNavigation.onBeforeNavigate.addListener(({ frameId, tabId }) => {
+      this.hide(frameId, tabId);
+    });
+    browser.webNavigation.onCompleted.addListener(({ frameId, tabId }) => {
+      this.show(frameId, tabId);
     });
   }
 
@@ -20,8 +21,18 @@ export default class PageAction {
     return new Uri('/survey/index.html').query(qs).toString();
   }
 
+  hide(frameId, tabId) {
+    if (frameId !== 0) {
+      return;
+    }
+    browser.pageAction.hide(tabId);
+  }
+  
   // Passed a tabs.Tab object, create and show the pageAction popup.
-  make(tabId) {
+  show(frameId, tabId) {
+    if (frameId !== 0) {
+      return;
+    }
     logger.log(`Showing for tab ${tabId}`);
     this.getSitename(tabId).then(sitename => {
       logger.log('sitename', sitename[0]);
