@@ -2,7 +2,7 @@
   "name": "pulse",
   "title": "Pulse",
   "id": "pulse@mozilla.com",
-  "description": "Some super sweet catchphrase.",
+  "description": "We're building the next generation of Firefox, and we're focusing on real-world speed and performance. Pulse lets you give our engineers feedback about your experience on websites that work well in Firefox and on websites that don't.",
   "author": "Firefox Test Pilot",
   "license": "MPL-2.0",
   "version": "0.9.2",
