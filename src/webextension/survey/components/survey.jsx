@@ -34,7 +34,7 @@ class Survey extends Component {
   }
 
   renderForm() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, initialValues: { sitename } } = this.props;
     return (
       <form onSubmit={handleSubmit}>
         <Field
@@ -42,6 +42,7 @@ class Survey extends Component {
           component={SentimentField}
           validate={[ required ]}
           parse={this.parseSentiment}
+          sitename={sitename}
           onChange={() => this.addtl(true)}
         />
         <div className="addtl">
@@ -75,7 +76,10 @@ Survey.propTypes = {
   pristine: React.PropTypes.bool.isRequired,
   submitting: React.PropTypes.bool.isRequired,
   submitSucceeded: React.PropTypes.bool.isRequired,
-  valid: React.PropTypes.bool.isRequired
+  valid: React.PropTypes.bool.isRequired,
+  initialValues: React.PropTypes.shape({
+    sitename: React.PropTypes.string.isRequired
+  }).isRequired
 };
 
 export default reduxForm({ form: 'survey' })(Survey);

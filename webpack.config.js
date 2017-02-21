@@ -65,6 +65,7 @@ const config = {
       { from: 'src/icons', to: 'webextension/icons' },
       { from: 'src/webextension/manifest.json', to: 'webextension' },
       { from: 'src/webextension/survey/index.html', to: 'webextension/survey' },
+      { from: 'src/webextension/data', to: 'webextension' },
       { from: 'package.json' },
       { from: 'LICENSE' }
     ]),

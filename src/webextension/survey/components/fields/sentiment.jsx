@@ -46,11 +46,11 @@ export default class SentimentField extends Component {
   }
 
   render() {
-    const { input } = this.props;
+    const { input, sitename } = this.props;
     return (
       <div className="field field--sentiment">
         <label>
-          How would you rate your experience on sitename?
+          How would you rate your experience on {sitename}?
         </label>
         {this.renderStars()}
         {input.touched && input.error && <span>{input.error}</span>}
@@ -59,4 +59,7 @@ export default class SentimentField extends Component {
   }
 }
 
-SentimentField.propTypes = { input: React.PropTypes.object.isRequired };
+SentimentField.propTypes = {
+  input: React.PropTypes.object.isRequired,
+  sitename: React.PropTypes.string.isRequired
+};
