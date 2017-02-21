@@ -2,11 +2,9 @@ const webpack = require('webpack');
 const { exec, mkdir } = require('shelljs');
 
 const AfterBuildPlugin = require('./lib/webpack-after-build');
-const BabiliPlugin = require('babili-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const ThrowErrorPlugin = require('./lib/webpack-error');
 
-const PRODUCTION = process.env.NODE_ENV && process.env.NODE_ENV === 'production';
 const WATCH_MODE = process.argv.includes('--watch');
 
 const config = {
@@ -80,9 +78,5 @@ const config = {
     })
   ]
 };
-
-if (PRODUCTION) {
-  config.plugins.push(new BabiliPlugin());
-}
 
 module.exports = config;
