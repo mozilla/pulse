@@ -1,5 +1,6 @@
 [👈 Back to README](../README.md)
 
+
 # Metrics
 
 A summary of the metrics the Pulse add-on will record.
@@ -26,6 +27,7 @@ The user is then presented with a short survey. Once submitted, it is augmented 
 
 
 ## Analysis
+
 
 ### Performance
 
@@ -58,17 +60,32 @@ Specific reports might be able to be passed on to the Web Compatability team for
 
 ## Collection
 
+
 ### `pulse-prompted`
 
 Fired whenever the user is prompted to provide feedback.
 
-**Properties:**
+
+#### Payload properties
 
 - `type`: string indicating why the user was prompted. See [Appendix A] for more information.
+
+
+#### Example ping
 
 ```js
 {
   "event": "pulse-prompted",
+  "test": "pulse@mozilla.com",
+  "version": "1.0.2",
+
+  // Added by the Test Pilot metrics broker. Not currently relevant.
+  "object": null,
+  "category": "interactions",
+  "variant": null,
+  "variants": null,
+  "timestamp": 76543,
+
   "type": "random"
 }
 ```
@@ -78,13 +95,27 @@ Fired whenever the user is prompted to provide feedback.
 
 Fired whenever the user dismisses a feedback prompt.
 
-**Properties:**
+
+#### Payload properties
 
 - `type`: string indicating why the user was prompted. See [Appendix A] for more information.
+
+
+#### Example ping
 
 ```js
 {
   "event": "pulse-dismissed",
+  "test": "pulse@mozilla.com",
+  "version": "1.0.2",
+
+  // Added by the Test Pilot metrics broker. Not currently relevant.
+  "object": null,
+  "category": "interactions",
+  "variant": null,
+  "variants": null,
+  "timestamp": 76543,
+
   "type": "random"
 }
 ```
@@ -94,14 +125,28 @@ Fired whenever the user dismisses a feedback prompt.
 
 Fired whenever the survey is opened, whether in a tab or page action doorhanger. After `pulse-loaded` is fired, will be followed by either `pulse-unloaded` (i.e. a bounce) or `pulse-submitted` (i.e. a conversion).
 
-**Properties:**
+
+#### Payload properties
 
 - `type`: string indicating why the user was prompted. See [Appendix A] for more information.
 - `id`: string containing a [v4 UUID] for the submission. The same ID will be included with the resultant `pulse-unloaded` or `pulse-submitted` ping.
 
+
+#### Example ping
+
 ```js
 {
   "event": "pulse-loaded",
+  "test": "pulse@mozilla.com",
+  "version": "1.0.2",
+
+  // Added by the Test Pilot metrics broker. Not currently relevant.
+  "object": null,
+  "category": "interactions",
+  "variant": null,
+  "variants": null,
+  "timestamp": 76543,
+
   "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
   "type": "random"
 }
@@ -112,14 +157,28 @@ Fired whenever the survey is opened, whether in a tab or page action doorhanger.
 
 Fired whenever the survey is closed without being submitted.
 
-**Properties:**
+
+#### Payload properties
 
 - `type`: string indicating why the user was prompted. See [Appendix A] for more information.
 - `id`: string containing a [v4 UUID] for the submission. The ID will be identical to the preceding `pulse-loaded` ping.
 
+
+#### Example ping
+
 ```js
 {
   "event": "pulse-unloaded",
+  "test": "pulse@mozilla.com",
+  "version": "1.0.2",
+
+  // Added by the Test Pilot metrics broker. Not currently relevant.
+  "object": null,
+  "category": "interactions",
+  "variant": null,
+  "variants": null,
+  "timestamp": 76543,
+
   "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
   "type": "random"
 }
@@ -130,7 +189,8 @@ Fired whenever the survey is closed without being submitted.
 
 Fired upon successful submission of the survey containing the survey data augmented with data gathered about the browser, page, and session.
 
-**Properties:**
+
+#### Payload properties
 
 - `type`: string indicating why the user was prompted. See [Appendix A] for more information.
 - `id`: string containing a [v4 UUID] for the submission. The ID will be identical to the preceding `pulse-loaded` ping.
@@ -171,7 +231,7 @@ Fired upon successful submission of the survey containing the survey data augmen
 - `timerWindowLoad`: the number of milliseconds between the start of the page load and the `load` event on `window`.
 - `timerFirstPaint`: the number of milliseconds between the start of the page load and the first paint.
 - `timerFirstInteraction`: the number of milliseconds between the start of the page load and the first of the following events: `click`, `touch`, `scroll`, `keypress`. `null` if none of these events took place.
-- `timerFirstByte`: the number of milliseconds between the start of the request and the time the first byte was received.
+- `timerFirstByte`: the number of milliseconds between the start of the request and the time the first byte was received. _Not currently implemented._
 - `requests`: an object containing information about requests spawned by the page. Each member key indicates the type of request, categorized as [`webRequest.ResourceType`s](https://developer.mozilla.org/Add-ons/WebExtensions/API/webRequest/ResourceType):
 
   * `beacon`
@@ -207,74 +267,107 @@ Fired upon successful submission of the survey containing the survey data augmen
 
 - `disconnectRequests`: the number of requests made to hosts on the [disconnect.me tracking protection blocklist](https://disconnect.me/trackerprotection).
 - `consoleErrors`: the number of errors logged to the browser console.
-- `engagement`: a number indicating the engagement score for the page. See [Appendix C] for more information.
-- `sessionSize`: the number of page visits in the session.
-- `sessionLength`: the number of milliseconds elapsed in a session.
-- `sessionTimerContentLoaded`: an [aggregation] of `timerContentLoaded` across the session.
-- `sessionTimerWindowLoad`: an [aggregation] of `timerWindowLoad` across the session.
-- `sessionTimerFirstPaint`: an [aggregation] of `timerFirstPaint` across the session.
-- `sessionTimerFirstInteraction`: an [aggregation] of `timerFirstInteraction` across the session.
-- `sessionTimerFirstByte`: an [aggregation] of `timerFirstByte` across the session.
-- `sessionRequests`: an object containing an [aggregation] of each type of request spawned by pages across the session.
-- `sessionEngagement`: an [aggregation] of `engagement` across the session.
+- `engagement`: a number indicating the engagement score for the page. See [Appendix C] for more information. _Not currently implemented._
+- `sessionSize`: the number of page visits in the session. _Not currently implemented._
+- `sessionLength`: the number of milliseconds elapsed in a session. _Not currently implemented._
+- `sessionTimerContentLoaded`: an [aggregation] of `timerContentLoaded` across the session. _Not currently implemented._
+- `sessionTimerWindowLoad`: an [aggregation] of `timerWindowLoad` across the session. _Not currently implemented._
+- `sessionTimerFirstPaint`: an [aggregation] of `timerFirstPaint` across the session. _Not currently implemented._
+- `sessionTimerFirstInteraction`: an [aggregation] of `timerFirstInteraction` across the session. _Not currently implemented._
+- `sessionTimerFirstByte`: an [aggregation] of `timerFirstByte` across the session. _Not currently implemented._
+- `sessionRequests`: an object containing an [aggregation] of each type of request spawned by pages across the session. _Not currently implemented._
+- `sessionEngagement`: an [aggregation] of `engagement` across the session. _Not currently implemented._
+
+
+#### Example ping
 
 ```js
 {
-  "event": "pulse-report",
-  "type": "user",
-  "id": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
-  "sentiment": 3,
-  "reason": "slow",
-  "details": null,
-  "telemetryId": "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee",
-  "platform ": "Darwin",
-  "language": "en-US",
-  "version": "52.0a2",
-  "channel": "developer",
-  "addons": [
-    "@testpilot-addon",
-    "@min-vid",
-    "pulse@mozilla.com"
-  ],
-  "adBlocker": true,
-  "trackingProtection": true,
-  "openTabs": 11,
-  "openWindows": 1,
-  "e10sStatus": 1,
-  "e10sProcessCount": 4,
+  "method": "pulse-submitted",
+  "test": "pulse@mozilla.com",
+  "version": "1.0.2",
+
+  // Added by the Test Pilot metrics broker. Not currently relevant.
+  "object": null,
+  "category": "interactions",
+  "variant": null,
+  "variants": null,
+  "timestamp": 76543,
+
+  "payload": {
+    "details": "test",
+    "id": "19e0cf07-8145-4666-938d-811397db85dc",
+    "sentiment": 5,
+    "reason": "like",
+    "requests": {
+      "all": {}
+        "num": 12,
+        "time": 4978,
+        "cached": 0.08333333333333333,
+        "cdn": 0
+      },
+      "main_frame": {
+        "num": 1,
+        "time": 726,
+        "cached": 0,
+        "cdn": 0
+      },
+      "sub_frame": {},
+      "stylesheet": {},
+      "script": {},
+      "image": {},
+      "object": {},
+      "xmlhttprequest": {},
+      "xbl": {},
+      "xslt": {},
+      "ping": {},
+      "beacon": {},
+      "xml_dtd": {},
+      "font": {},
+      "media": {},
+      "websocket": {},
+      "csp_report": {},
+      "imageset": {},
+      "web_manifest": {},
+      "other": {}
+    },
+    "disconnectRequests": 1,
+    "adBlocker": true,
+    "addons": [
+      "pulse@mozilla.com",
+      "inspector@mozilla.org",
+      "DevPrefs@jetpack",
+      "@min-vid"
+    ],
+    "channel": "developer",
+    "consoleErrors": 0,
+    "e10sStatus": 1,
+    "e10sProcessCount": 4,
+    "hostname": "github.com",
+    "language": "en-US",
+    "openTabs": 7,
+    "openWindows": 2,
+    "platform": "darwin",
+    "protocol": "https:",
+    "telemetryId": "549a6456-32c2-e048-8310-d22ccfa9fee1",
+    "timerContentLoaded": 589,
+    "timerFirstInteraction": null,
+    "timerFirstPaint": 41,
+    "timerWindowLoad": 1005,
+    "timestamp": 1487862372503,
+    "trackingProtection": false,
+    "version": "53.0a2",
+  }
+}
+```
+
+
+#### Not currently implemented
+
+```js
+{
   "hangs": 0,
-  "timestamp": 1485394950697,
-  "hostname": "testpilot.firefox.com",
-  "protocol": "https:",
-  "timerContentLoaded": 110,
-  "timerWindowLoad": 190,
-  "timerFirstPaint": 80,
-  "timerFirstInteraction": 1300,
   "timerFirstByte": 19,
-  "requests": {
-    "all":            { "num": 1, "cached": 0.123, "cdn": 0.4, "time": 274 },
-    "main_frame":     { ... },
-    "sub_frame":      { ... },
-    "stylesheet":     { ... },
-    "script":         { ... },
-    "image":          { ... },
-    "object":         { ... },
-    "xmlhttprequest": { ... },
-    "xbl":            { ... },
-    "xslt":           { ... },
-    "ping":           { ... },
-    "beacon":         { ... },
-    "xml_dtd":        { ... },
-    "font":           { ... },
-    "media":          { ... },
-    "websocket":      { ... },
-    "csp_report":     { ... },
-    "imageset":       { ... },
-    "web_manifest":   { ... },
-    "other":          { ... }
-  },
-  "disconnectRequests": 17,
-  "consoleErrors": 7,
   "engagement": 77.9,
   "sessionSize": 24,
   "sessionLength": 1411080,
