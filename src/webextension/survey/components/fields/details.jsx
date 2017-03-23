@@ -5,6 +5,7 @@ export default class DetailsField extends Component {
     const { input } = this.props;
     return (
       <div className="field field--details">
+        <label className="step" htmlFor={input.name}>3.</label>
         <label htmlFor={input.name} id={input.name}>Any other comments?</label>
         <textarea placeholder="Optional comments..." {...input} />
       </div>

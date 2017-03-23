@@ -59,6 +59,7 @@ class ReasonField extends Component {
     const { input: { name } } = this.props;
     return (
       <div className="field field--reason">
+        <label className="step" htmlFor={name}>2.</label>
         <label htmlFor={name}>This page is:</label>
         {this.renderSelect()}
       </div>

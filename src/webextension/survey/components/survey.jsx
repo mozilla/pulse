@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
+import Header from './header.jsx';
 import Thanks from './thanks.jsx';
 import DetailsField from './fields/details.jsx';
 import SentimentField from './fields/sentiment.jsx';
@@ -37,6 +38,7 @@ class Survey extends Component {
     const { handleSubmit, initialValues: { sitename } } = this.props;
     return (
       <form onSubmit={handleSubmit}>
+        <Header subheader="User satisfaction survey" />
         <Field
           name="sentiment"
           component={SentimentField}
@@ -62,7 +64,10 @@ class Survey extends Component {
   }
 
   render() {
-    const { submitSucceeded } = this.props;
+    const { initialValues, pristine, submitSucceeded } = this.props;
+    if (pristine && initialValues.sentiment) {
+      this.addtl(true);
+    }
     if (submitSucceeded) {
       this.addtl(false);
       return <Thanks subheader="Thank you!" />;

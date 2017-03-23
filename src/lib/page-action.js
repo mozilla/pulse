@@ -26,20 +26,28 @@ export default class PageAction {
     return new Uri('/survey/index.html').query(qs).toString();
   }
 
-  // Passed frame and tab IDs, create and show the pageAction popup for that
-  // tab if the frame is an outermost frame.
+  hide(frameId, tabId) {
+    if (frameId !== 0) {
+      return;
+    }
+    browser.pageAction.hide(tabId);
+  }
+
+  // Passed a tabs.Tab object, create and show the pageAction popup.
   create(frameId, tabId) {
-    if (frameId !== 0) return;
-    logger.log(`Creating page action for tab ${tabId}.`);
+    if (frameId !== 0) {
+      return;
+    }
+    logger.log(`Showing for tab ${tabId}`);
     this.getSitename(tabId).then(sitename => {
       browser.pageAction.setPopup({
         tabId,
         popup: this.makeSurveyUrl({ sitename })
       });
       browser.pageAction.show(tabId);
-      browser.tabs.executeScript(tabId, {
-        code: `${PULSE_STATUS} = true;`
-      }).then();
+      browser.tabs
+        .executeScript(tabId, { code: `${PULSE_STATUS} = true;` })
+        .then();
     });
   }
 
@@ -49,17 +57,15 @@ export default class PageAction {
     if (frameId !== 0) return;
     logger.log(`Destroying page action for tab ${tabId}.`);
     browser.pageAction.hide(tabId);
-    browser.tabs.executeScript(tabId, {
-      code: `${PULSE_STATUS} = false;`
-    }).then();
+    browser.tabs
+      .executeScript(tabId, { code: `${PULSE_STATUS} = false;` })
+      .then();
   }
-  
+
   // Passed a tab IDs, show the pageAction popup for that tab if it has already
   // been created.
   show(tabId) {
-    browser.tabs.executeScript(tabId, {
-      code: PULSE_STATUS
-    }).then(results => {
+    browser.tabs.executeScript(tabId, { code: PULSE_STATUS }).then(results => {
       if (results.length && !!results[0]) {
         logger.log(`Showing page action for tab ${tabId}.`);
         browser.pageAction.show(tabId);

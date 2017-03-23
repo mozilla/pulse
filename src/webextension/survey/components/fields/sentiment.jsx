@@ -49,6 +49,7 @@ export default class SentimentField extends Component {
     const { input, sitename } = this.props;
     return (
       <div className="field field--sentiment">
+        <label className="step">1.</label>
         <label>
           How would you rate your experience on {sitename}?
         </label>
