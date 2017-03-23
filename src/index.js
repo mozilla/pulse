@@ -3,9 +3,11 @@ import self from 'sdk/self';
 import { storage } from 'sdk/simple-storage';
 import webext from 'sdk/webextension';
 import tabs from 'sdk/tabs';
+import { setTimeout } from 'sdk/timers';
 import { getMostRecentBrowserWindow } from 'sdk/window/utils';
 
 import Logger from './lib/log';
+import Notification from './lib/notify';
 import sendEvent from './lib/metrics';
 import measure from './measurements';
 
@@ -59,14 +61,25 @@ webext.startup().then(({ browser }) => {
       // When a submission is received, augment it with measurements before
       // submitting.
       case 'submitted': {
-        measure(msg.payload).then(measurements => {
-          const submittedPing = Object.assign(msg.payload, measurements, {
-            method: 'pulse-submitted'
+        measure(msg.payload)
+          .then(measurements => {
+            const submittedPing = Object.assign(msg.payload, measurements, {
+              method: 'pulse-submitted'
+            });
+            logger.log('Submitted', submittedPing);
+            sendEvent(submittedPing);
+            delete storage.id[msg.payload.id];
+          })
+          .catch(err => {
+            logger.log(err);
           });
-          logger.log('Submitted', submittedPing);
-          sendEvent(submittedPing);
-          delete storage.id[msg.payload.id];
-        });
+        break;
+      }
+
+      //
+      case 'survey-url': {
+        logger.log('Received survey url', msg.payload);
+        storage.surveyUrl = msg.payload;
         break;
       }
 
@@ -76,4 +89,10 @@ webext.startup().then(({ browser }) => {
       }
     }
   });
+  setTimeout(
+    () => {
+      new Notification({ surveyUrl: storage.surveyUrl });
+    },
+    5000
+  );
 });

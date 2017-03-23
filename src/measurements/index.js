@@ -49,8 +49,8 @@ const logger = new Logger(
 // Passed the output from the survey, augments that data with each measurment
 // in MEASUREMENTS and returns a promise resolving to a Map containing the full
 // payload, ready for submission to telemetry.
-export default data => {
-  const survey = new Map(Object.entries(data));
+export default surveyData => {
+  const survey = new Map(Object.entries(surveyData));
   logger.log(`Collecting data for ${survey.get('id')}`);
   const tab = storage.id[survey.get('id')];
   survey.delete('id');

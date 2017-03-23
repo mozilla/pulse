@@ -17,12 +17,6 @@ class App extends Component {
     // Ensure that optional fields are included in the payload, even if empty.
     const defaultValues = { details: '' };
 
-    // Generate a UUID, then send to the host SDK add-on so that it can
-    // associate a future submission with the correct tab and window.
-    defaultValues.id = uuid();
-    window.surveyId = defaultValues.id;
-    sendMessage('loaded', { id: defaultValues.id, type: 'user' });
-
     // Get `sentiment` and `type` from the querystring.
     const qs = new Uri(window.location.search).search(true);
     if (!qs.sitename) {
@@ -35,6 +29,15 @@ class App extends Component {
       defaultValues,
       qs
     );
+
+    // Generate a UUID, then send to the host SDK add-on so that it can
+    // associate a future submission with the correct tab and window.
+    if (!('id' in initialValues)) {
+      initialValues.id = uuid();
+      sendMessage('loaded', { id: initialValues.id, type: 'user' });
+    }
+    window.surveyId = initialValues.id;
+
     if ('sentiment' in initialValues) {
       initialValues.sentiment = parseInt(initialValues.sentiment, 10);
     }
