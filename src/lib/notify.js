@@ -91,7 +91,7 @@ export default class Notification extends BaseElement {
     this.notifyBox = null;
     this.getSiteName().then(sitename => {
       options.label = `How would you rate your experience on ${sitename}?`;
-      this.element = this.render(options);
+      this.element = this.render(sitename, options);
     });
   }
 
@@ -119,9 +119,13 @@ export default class Notification extends BaseElement {
     notifyBox.removeNotification(notification);
   }
 
-  openSurvey(surveyUrl, sentiment) {
+  openSurvey(surveyUrl, sentiment, sitename) {
     storage.id[this.id] = tabs.activeTab;
-    tabs.open(new Uri(surveyUrl).query({ id: this.id, sentiment }).toString());
+    tabs.open(new Uri(surveyUrl).query({
+      id: this.id,
+      sentiment,
+      sitename
+    }).toString());
   }
 
   getParts(elem) {
@@ -176,7 +180,7 @@ export default class Notification extends BaseElement {
     });
   }
 
-  render(instanceOptions) {
+  render(sitename, instanceOptions) {
     this.promptedPing();
 
     const notifyBox = this.notifyBox = this.getWindow().gBrowser.getNotificationBox();
@@ -196,7 +200,7 @@ export default class Notification extends BaseElement {
     notification.appendChild(
       new Rating(sentiment => {
         this.dismiss(notifyBox, notification);
-        this.openSurvey(options.surveyUrl, sentiment);
+        this.openSurvey(options.surveyUrl, sentiment, sitename);
       }).element
     );
     notification.classList.add('heartbeat');
