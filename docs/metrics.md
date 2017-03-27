@@ -147,7 +147,22 @@ Fired upon successful submission of the survey containing the survey data augmen
 - `trackingProtection`: a boolean indicating whether tracking protection is enabled.
 - `openTabs`: a number indicating the count of open tabs across the browser.
 - `openWindows`: a number indicating the count of open windows across the browser.
-- `e10s`: a number indicating the number of content processes, retrieved from `dom.ipc.processCount`.
+- `e10sStatus`: a number indicating the status of e10s in the browser. Known values:
+
+  * `0` - Enabled by user
+  * `1` - Enabled by default
+  * `2` - Disabled
+  * `3` - Not used
+  * `4` - Disabled by accessibility tools
+  * `5` - Disabled by lack of graphics hardware acceleration on Mac OS X
+  * `6` - Disabled by unsupported text input
+  * `7` - Disabled by add-ons
+  * `8` - Disabled forcibly
+  * `9` - Disabled by graphics hardware acceleration on Windows XP
+
+  The latest list of values can be found by inspecting `multiProcessStatus` in [`aboutSupport.properties`](https://dxr.mozilla.org/mozilla-central/source/toolkit/locales/en-US/chrome/global/aboutSupport.properties).
+
+- `e10sProcessCount`: a number indicating the number of content processes, retrieved from `dom.ipc.processCount`.
 - `hangs`: a TBD measurement of the number of hangs across the browser. Likely to be split into child and main processes.
 - `timestamp`: a number containing a Unix timestamp from which the page request began.
 - `hostname`: a string indicating the hostname of the page request, as reported by `window.location.hostname`.
@@ -178,11 +193,11 @@ Fired upon successful submission of the survey containing the survey data augmen
   * `xml_dtd`
   * `xmlhttprequest`
   * `xslt`
-  
+
   With one special value:
 
   * `all`: all requests of all types, summed.
-  
+
   Each value of the object contains three data points:
 
   * `num`: the number of requests of that type.
@@ -196,7 +211,7 @@ Fired upon successful submission of the survey containing the survey data augmen
 - `sessionSize`: the number of page visits in the session.
 - `sessionLength`: the number of milliseconds elapsed in a session.
 - `sessionTimerContentLoaded`: an [aggregation] of `timerContentLoaded` across the session.
-- `sessionTimerWindowLoad`: an [aggregation] of `timerWindowLoad` across the session. 
+- `sessionTimerWindowLoad`: an [aggregation] of `timerWindowLoad` across the session.
 - `sessionTimerFirstPaint`: an [aggregation] of `timerFirstPaint` across the session.
 - `sessionTimerFirstInteraction`: an [aggregation] of `timerFirstInteraction` across the session.
 - `sessionTimerFirstByte`: an [aggregation] of `timerFirstByte` across the session.
@@ -225,7 +240,8 @@ Fired upon successful submission of the survey containing the survey data augmen
   "trackingProtection": true,
   "openTabs": 11,
   "openWindows": 1,
-  "e10s": 3,
+  "e10sStatus": 1,
+  "e10sProcessCount": 4,
   "hangs": 0,
   "timestamp": 1485394950697,
   "hostname": "testpilot.firefox.com",

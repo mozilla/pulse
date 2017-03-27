@@ -6,6 +6,7 @@ import tabs from 'sdk/tabs';
 import { setTimeout } from 'sdk/timers';
 import { getMostRecentBrowserWindow } from 'sdk/window/utils';
 
+import { e10sStatus, e10sProcessCount } from './lib/e10s-status';
 import Logger from './lib/log';
 import Notification from './lib/notify';
 import sendEvent from './lib/metrics';
@@ -64,6 +65,8 @@ webext.startup().then(({ browser }) => {
         measure(msg.payload)
           .then(measurements => {
             const submittedPing = Object.assign(msg.payload, measurements, {
+              e10sStatus: e10sStatus(),
+              e10sProcessCount: e10sProcessCount(),
               method: 'pulse-submitted'
             });
             logger.log('Submitted', submittedPing);
