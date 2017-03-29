@@ -50,16 +50,22 @@ export default class PageAction {
     if (frameId !== 0) {
       return;
     }
-    logger.log(`Showing for tab ${tabId}`);
-    this.getSitename(tabId).then(sitename => {
-      browser.pageAction.setPopup({
-        tabId,
-        popup: this.makeSurveyUrl({ sitename })
-      });
-      browser.pageAction.show(tabId);
-      browser.tabs
-        .executeScript(tabId, { code: `${PULSE_STATUS} = true;` })
-        .then();
+    browser.tabs.get(tabId).then(tab => {
+      if (tab.url.startsWith('http')) {
+        logger.log(`Showing for tab ${tabId}`);
+        this.getSitename(tabId).then(sitename => {
+          browser.pageAction.setPopup({
+            tabId,
+            popup: this.makeSurveyUrl({ sitename })
+          });
+          browser.pageAction.show(tabId);
+          browser.tabs
+            .executeScript(tabId, { code: `${PULSE_STATUS} = true;` })
+            .then();
+        });
+      } else {
+        logger.log(`Not showing pageAction for ${tabId} due to protocol.`);
+      }
     });
   }
 
