@@ -1,7 +1,8 @@
+import Uri from 'urijs';
 import uuid from 'uuid';
 
 import { Services } from 'resource://gre/modules/Services.jsm';
-import Uri from 'urijs';
+import { isPrivate } from 'sdk/private-browsing';
 import { data } from 'sdk/self';
 import { storage } from 'sdk/simple-storage';
 import tabs from 'sdk/tabs';
@@ -85,17 +86,20 @@ class Rating extends BaseElement {
 export default class Notification extends BaseElement {
   constructor(options) {
     super(...arguments);
-    this.id = uuid();
-    this.type = 'random';
-
-    this.notifyBox = null;
-    this.getSiteName().then(sitename => {
-      if (sitename.length > 25) {
-        sitename = `${sitename.slice(0, 20)}...`;
-      }
-      options.label = `How would you rate your experience on ${sitename}?`;
-      this.element = this.render(sitename, options);
-    });
+    if (isPrivate(tabs.activeTab)) {
+      logger.log(`Not prompting in ${tabs.activeTab.id} due to PBM.`);
+    } else {
+      this.id = uuid();
+      this.type = 'random';
+      this.notifyBox = null;
+      this.getSiteName().then(sitename => {
+        if (sitename.length > 25) {
+          sitename = `${sitename.slice(0, 20)}...`;
+        }
+        options.label = `How would you rate your experience on ${sitename}?`;
+        this.element = this.render(sitename, options);
+      });
+    }
   }
 
   promptedPing() {

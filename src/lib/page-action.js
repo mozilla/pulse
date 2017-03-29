@@ -8,7 +8,13 @@ const PULSE_STATUS = 'window.__pulse_initiated__';
 export default class PageAction {
   constructor() {
     browser.webNavigation.onCompleted.addListener(({ frameId, tabId }) => {
-      this.create(frameId, tabId);
+      browser.tabs.get(tabId).then(tab => {
+        if (tab.incognito) {
+          logger.log(`Not showing pageAction for ${tabId} because of PBM.`);
+        } else {
+          this.create(frameId, tabId);
+        }
+      });
     });
     browser.webNavigation.onHistoryStateUpdated.addListener((
       { frameId, tabId }
