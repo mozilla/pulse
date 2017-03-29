@@ -120,6 +120,9 @@ export default class Notification extends BaseElement {
   }
 
   openSurvey(surveyUrl, sentiment, sitename) {
+    if (!storage.id) {
+      storage.id = {};
+    }
     storage.id[this.id] = tabs.activeTab;
     tabs.open(new Uri(surveyUrl).query({
       id: this.id,
