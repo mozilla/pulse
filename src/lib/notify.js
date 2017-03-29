@@ -88,6 +88,8 @@ export default class Notification extends BaseElement {
     super(...arguments);
     if (isPrivate(tabs.activeTab)) {
       logger.log(`Not prompting in ${tabs.activeTab.id} due to PBM.`);
+    } else if (!tabs.activeTab.url.startsWith('http')) {
+      logger.log(`Not prompting in ${tabs.activeTab.id} due to protocol.`);
     } else {
       this.id = uuid();
       this.type = 'random';
