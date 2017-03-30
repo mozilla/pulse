@@ -3,12 +3,11 @@ import self from 'sdk/self';
 import { storage } from 'sdk/simple-storage';
 import webext from 'sdk/webextension';
 import tabs from 'sdk/tabs';
-import { setTimeout } from 'sdk/timers';
 import { getMostRecentBrowserWindow } from 'sdk/window/utils';
 
 import { e10sStatus, e10sProcessCount } from './lib/e10s-status';
 import Logger from './lib/log';
-import Notification from './lib/notify';
+import NotificationWatcher from './lib/notify';
 import sendEvent from './lib/metrics';
 import measure from './measurements';
 
@@ -92,10 +91,6 @@ webext.startup().then(({ browser }) => {
       }
     }
   });
-  setTimeout(
-    () => {
-      new Notification({ surveyUrl: storage.surveyUrl });
-    },
-    5000
-  );
+
+  new NotificationWatcher();
 });
