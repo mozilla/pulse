@@ -10,6 +10,12 @@ export default class PageAction {
     browser.webNavigation.onCompleted.addListener(({ frameId, tabId }) => {
       this.create(frameId, tabId);
     });
+    browser.webNavigation.onHistoryStateUpdated.addListener((
+      { frameId, tabId }
+    ) =>
+      {
+        this.create(frameId, tabId);
+      });
     browser.webNavigation.onBeforeNavigate.addListener(({ frameId, tabId }) => {
       this.destroy(frameId, tabId);
     });
