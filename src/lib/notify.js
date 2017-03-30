@@ -90,6 +90,9 @@ export default class Notification extends BaseElement {
 
     this.notifyBox = null;
     this.getSiteName().then(sitename => {
+      if (sitename.length > 25) {
+        sitename = `${sitename.slice(0, 20)}...`;
+      }
       options.label = `How would you rate your experience on ${sitename}?`;
       this.element = this.render(sitename, options);
     });
