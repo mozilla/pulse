@@ -45,13 +45,21 @@ export default class SentimentField extends Component {
     );
   }
 
+  getSitename() {
+    const { sitename } = this.props;
+    if (sitename.length > 25) {
+      return `${sitename.slice(0, 20)}...`;
+    }
+    return sitename;
+  }
+
   render() {
-    const { input, sitename } = this.props;
+    const { input } = this.props;
     return (
       <div className="field field--sentiment">
         <label className="step">1.</label>
         <label>
-          How would you rate your experience on {sitename}?
+          How would you rate your experience on {this.getSitename()}?
         </label>
         {this.renderStars()}
         {input.touched && input.error && <span>{input.error}</span>}
