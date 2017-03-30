@@ -6,6 +6,7 @@ import { isPrivate } from 'sdk/private-browsing';
 import { data } from 'sdk/self';
 import { storage } from 'sdk/simple-storage';
 import tabs from 'sdk/tabs';
+import { setInterval, setTimeout } from 'sdk/timers';
 import { getMostRecentBrowserWindow } from 'sdk/window/utils';
 
 import Logger from './log';
@@ -15,6 +16,18 @@ const logger = new Logger(
   'sdk.lib.notify',
   getMostRecentBrowserWindow().console
 );
+
+// The frequency with which we will
+// 1) Check to see if we should show the prompt
+// 2) Wait to show the prompt once the timer has elapsed, i.e. the fuse
+// const POLL_INTERVAL = 1000 * 60 * 5;  // 5 minutes
+
+// The minimum frequency with which we should show the prompt.
+// const PROMPT_INTERVAL = 1000 * 60 * 60 * 30;  // 30 hours
+
+// For testing, poll every 15 seconds and prompt every 4 minutes.
+const POLL_INTERVAL = 1000 * 15;
+const PROMPT_INTERVAL = 1000 * 60 * 4;
 
 class BaseElement {
   getWindow() {
@@ -83,7 +96,7 @@ class Rating extends BaseElement {
   }
 }
 
-export default class Notification extends BaseElement {
+class Notification extends BaseElement {
   constructor(options) {
     super(...arguments);
     if (isPrivate(tabs.activeTab)) {
@@ -235,3 +248,34 @@ Notification.prototype.defaultOptions = {
   },
   persistence: 1
 };
+
+
+export default class NotificationWatcher {
+  constructor() {
+    if (!storage.nextPrompt) {
+      storage.nextPrompt = this.nextPrompt();
+    }
+    this.intervalCallback();
+    this.interval = setInterval(() => this.intervalCallback(), POLL_INTERVAL);
+  }
+
+  nextPrompt() {
+    return new Date().getTime() + PROMPT_INTERVAL;
+  }
+
+  intervalCallback() {
+    const now = new Date().getTime();
+    if (now < storage.nextPrompt) {
+      logger.log(`Next prompt in ${(storage.nextPrompt - now)/1000}s`);
+      return;
+    }
+    logger.log(`Setting up prompt, will show in ${POLL_INTERVAL/1000}s`);
+    this.timeout = setTimeout(() => this.showPrompt(), POLL_INTERVAL);
+    storage.nextPrompt = this.nextPrompt();
+  }
+
+  showPrompt() {
+    logger.log('Showing prompt.');
+    new Notification({ surveyUrl: storage.surveyUrl });
+  }
+}
