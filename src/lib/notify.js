@@ -20,14 +20,10 @@ const logger = new Logger(
 // The frequency with which we will
 // 1) Check to see if we should show the prompt
 // 2) Wait to show the prompt once the timer has elapsed, i.e. the fuse
-// const POLL_INTERVAL = 1000 * 60 * 5;  // 5 minutes
+const POLL_INTERVAL = 1000 * 60 * 5;  // 5 minutes
 
 // The minimum frequency with which we should show the prompt.
-// const PROMPT_INTERVAL = 1000 * 60 * 60 * 30;  // 30 hours
-
-// For testing, poll every 15 seconds and prompt every 4 minutes.
-const POLL_INTERVAL = 1000 * 15;
-const PROMPT_INTERVAL = 1000 * 60 * 4;
+const PROMPT_INTERVAL = 1000 * 60 * 60 * 30;  // 30 hours
 
 class BaseElement {
   getWindow() {
