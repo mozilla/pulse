@@ -7,8 +7,6 @@ import DetailsField from './fields/details.jsx';
 import SentimentField from './fields/sentiment.jsx';
 import ReasonField from './fields/reason.jsx';
 
-const maxLength = max => value =>
-  value && value.length > max ? `Must be ${max} characters or less` : undefined;
 const required = value => value ? undefined : 'Required';
 
 class Survey extends Component {
@@ -56,11 +54,7 @@ class Survey extends Component {
               component={ReasonField}
               validate={[ required ]}
             />
-            <Field
-              name="details"
-              component={DetailsField}
-              validate={[ maxLength(4096) ]}
-            />
+            <Field name="details" component={DetailsField} />
             {this.renderButton()}
           </div>
           {this.renderScreen()}
