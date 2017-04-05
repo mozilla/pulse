@@ -248,16 +248,6 @@ label.step {
   display: none;
 }
 
-.field--error,
-.field--error label {
-  color: #DB1C00;
-  font-weight: bold;
-}
-
-.field--error-message {
-  margin-top: 4px;
-}
-
 @media all and (min-width: 351px) {
   body {
     width: auto;
