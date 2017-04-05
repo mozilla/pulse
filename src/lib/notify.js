@@ -17,13 +17,15 @@ const logger = new Logger(
   getMostRecentBrowserWindow().console
 );
 
-// The frequency with which we will
-// 1) Check to see if we should show the prompt
-// 2) Wait to show the prompt once the timer has elapsed, i.e. the fuse
-const POLL_INTERVAL = 1000 * 60 * 5;  // 5 minutes
+// The frequency with which we will:
+// 1) Check to see if we should show the prompt.
+// 2) Wait to show the prompt once the timer has elapsed, i.e. the fuse.
+// 5 minutes
+const POLL_INTERVAL = 1000 * 60 * 5;
 
 // The minimum frequency with which we should show the prompt.
-const PROMPT_INTERVAL = 1000 * 60 * 60 * 30;  // 30 hours
+// 30 hours
+const PROMPT_INTERVAL = 1000 * 60 * 60 * 30;
 
 class BaseElement {
   getWindow() {
@@ -142,11 +144,9 @@ class Notification extends BaseElement {
       storage.id = {};
     }
     storage.id[this.id] = tabs.activeTab;
-    tabs.open(new Uri(surveyUrl).query({
-      id: this.id,
-      sentiment,
-      sitename
-    }).toString());
+    tabs.open(
+      new Uri(surveyUrl).query({ id: this.id, sentiment, sitename }).toString()
+    );
   }
 
   getParts(elem) {
@@ -246,7 +246,6 @@ Notification.prototype.defaultOptions = {
   persistence: 1
 };
 
-
 export default class NotificationWatcher {
   constructor() {
     if (!storage.nextPrompt) {
@@ -263,10 +262,10 @@ export default class NotificationWatcher {
   intervalCallback() {
     const now = new Date().getTime();
     if (now < storage.nextPrompt) {
-      logger.log(`Next prompt in ${(storage.nextPrompt - now)/1000}s`);
+      logger.log(`Next prompt in ${(storage.nextPrompt - now) / 1000}s`);
       return;
     }
-    logger.log(`Setting up prompt, will show in ${POLL_INTERVAL/1000}s`);
+    logger.log(`Setting up prompt, will show in ${POLL_INTERVAL / 1000}s`);
     this.timeout = setTimeout(() => this.showPrompt(), POLL_INTERVAL);
     storage.nextPrompt = this.nextPrompt();
   }

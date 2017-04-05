@@ -17,7 +17,6 @@ const maxLength = length => {
 };
 const required = value => value ? undefined : 'Required';
 
-
 class Survey extends Component {
   parseSentiment(val) {
     return parseInt(val, 10);
