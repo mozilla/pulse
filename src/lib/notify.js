@@ -214,6 +214,7 @@ class Notification extends BaseElement {
       this.defaultOptions,
       instanceOptions
     );
+    notifyBox.removeAllNotifications(true);
     const notification = notifyBox.appendNotification(
       options.label,
       `pulse-${new Date().getTime()}`,
