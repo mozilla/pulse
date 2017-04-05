@@ -7,7 +7,16 @@ import DetailsField from './fields/details.jsx';
 import SentimentField from './fields/sentiment.jsx';
 import ReasonField from './fields/reason.jsx';
 
+const maxLength = length => {
+  return value => {
+    if (value.length > length) {
+      return value.slice(0, length);
+    }
+    return value;
+  };
+};
 const required = value => value ? undefined : 'Required';
+
 
 class Survey extends Component {
   parseSentiment(val) {
@@ -54,7 +63,11 @@ class Survey extends Component {
               component={ReasonField}
               validate={[ required ]}
             />
-            <Field name="details" component={DetailsField} />
+            <Field
+              name="details"
+              component={DetailsField}
+              normalize={maxLength(4096)}
+            />
             {this.renderButton()}
           </div>
           {this.renderScreen()}
