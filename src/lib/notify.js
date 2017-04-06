@@ -145,7 +145,9 @@ class Notification extends BaseElement {
     }
     storage.id[this.id] = tabs.activeTab;
     tabs.open(
-      new Uri(surveyUrl).query({ id: this.id, sentiment, sitename }).toString()
+      new Uri(surveyUrl)
+        .query({ id: this.id, type: 'random', sentiment, sitename })
+        .toString()
     );
   }
 

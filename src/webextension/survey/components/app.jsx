@@ -34,8 +34,11 @@ class App extends Component {
     // associate a future submission with the correct tab and window.
     if (!('id' in initialValues)) {
       initialValues.id = uuid();
-      sendMessage('loaded', { id: initialValues.id, type: 'user' });
     }
+    sendMessage('loaded', {
+      id: initialValues.id,
+      type: initialValues.type || 'user'
+    });
     window.surveyId = initialValues.id;
 
     if ('sentiment' in initialValues) {
