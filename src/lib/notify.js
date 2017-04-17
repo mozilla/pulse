@@ -11,6 +11,7 @@ import { getMostRecentBrowserWindow } from 'sdk/window/utils';
 
 import Logger from './log';
 import sendEvent from './metrics';
+import { storeTab } from './messages';
 
 const logger = new Logger(
   'sdk.lib.notify',
@@ -140,10 +141,6 @@ class Notification extends BaseElement {
   }
 
   openSurvey(surveyUrl, sentiment, sitename) {
-    if (!storage.id) {
-      storage.id = {};
-    }
-    storage.id[this.id] = tabs.activeTab;
     tabs.open(
       new Uri(surveyUrl)
         .query({ id: this.id, type: 'random', sentiment, sitename })
@@ -205,6 +202,7 @@ class Notification extends BaseElement {
 
   render(sitename, instanceOptions) {
     this.promptedPing();
+    storeTab(this.id);
 
     const notifyBox = this.notifyBox = this.getWindow().gBrowser.getNotificationBox();
     const options = Object.assign(
