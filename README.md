@@ -11,6 +11,7 @@ Pulse is a [Test Pilot](https://testpilot.firefox.com) experiment that intends t
 
 - [Development](docs/development.md)
 - [Metrics](docs/metrics.md)
+- [Analysis](analysis/README.md)
 
 
 ## More Information
