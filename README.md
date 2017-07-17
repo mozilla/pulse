@@ -6,6 +6,7 @@
 
 Pulse is a [Test Pilot](https://testpilot.firefox.com) experiment that intends to align user satisfaction and perceived performance with more traditional performance metrics.
 
+Pulse has graduated! Read [the graduation report](https://testpilot.firefox.com/experiments/pulse) to see what we learned and what happens next.
 
 ## Table of Contents
 

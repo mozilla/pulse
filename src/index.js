@@ -1,29 +1,20 @@
-import { PageMod } from 'sdk/page-mod';
-import self from 'sdk/self';
-import webext from 'sdk/webextension';
+/*
+Pulse has graduated, and the final version uninstalls itself.
+
+To see the final version that was shipped to users, browse the 1.1.2 tag in the
+repository on GitHub:
+
+https://github.com/mozilla/pulse/tree/1.1.2
+*/
+
+import { Cu } from 'chrome';
 import { getMostRecentBrowserWindow } from 'sdk/window/utils';
-
 import Logger from './lib/log';
-import handleMessage from './lib/messages';
-import NotificationWatcher from './lib/notify';
 
+const { AddonManager } = Cu.import('resource://gre/modules/AddonManager.jsm');
 const logger = new Logger('sdk.index', getMostRecentBrowserWindow().console);
 
-logger.log('SDK startup');
-
-PageMod({
-  include: '*',
-  contentScriptFile: self.data.url('pagemonitor.js'),
-  contentScriptWhen: 'start'
-});
-
-// On startup, establish a connection with the embedded WebExtension.
-webext.startup().then(({ browser }) => {
-  logger.log('WebExtension startup');
-
-  // Listen for messages from the WebExtension.
-  browser.runtime.onMessage.addListener(handleMessage);
-
-  // Start time for prompted feedback.
-  new NotificationWatcher();
+logger.log('Uninstalling Pulse. Thanks for the good times!')
+AddonManager.getAddonByID('pulse@mozilla.com', addon => {
+  addon.uninstall();
 });
