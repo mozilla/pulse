@@ -5,9 +5,9 @@
   "description": "We're building the next generation of Firefox, and we're focusing on real-world speed and performance. Pulse lets you give our engineers feedback about your experience on websites that work well in Firefox and on websites that don't.",
   "author": "Firefox Test Pilot",
   "license": "MPL-2.0",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "homepage": "https://testpilot.firefox.com/experiments/pulse",
-  "hasEmbeddedWebExtension": true,
+  "hasEmbeddedWebExtension": false,
   "permissions": {
     "multiprocess": true,
     "private-browsing": true
